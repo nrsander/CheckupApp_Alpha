@@ -1,0 +1,71 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###       CMC FUNCTIONS       ###
+
+
+# Get.Coin("ABC")
+Get.Coin <- function(ticker) {
+  df <- CMC[CMC$symb == ticker,]
+  df
+}
+
+
+# Get.HotTopX
+Get.HotTopX <- function(CoinsThruRank=100,TimePeriod) {
+  
+  if (TimePeriod =="h") {
+  df <- arrange(.data = CMC[1:CoinsThruRank,], desc(ch1h))
+  } else if (TimePeriod == "d") {
+    df <- arrange(.data = CMC[1:CoinsThruRank,], desc(ch24h))
+  } else if (TimePeriod == "w") {
+    df <- arrange(.data = CMC[1:CoinsThruRank,], desc(ch7d))
+  } else {
+    df <- arrange(.data = CMC[1:100,], desc(ch24h))
+  }
+}
+
+
+# PrintHotTopNReport
+PrintHotTopNReport <- function(searchThruRank, hottopN) {
+  message("")
+  message("")
+  message(".****************************************************************************************.")
+  message("| HOT TOP ", hottopN, "  over last...        7 Days    /    24 Hours    /    1 Hour                |")
+  message("'****************************************************************************************'")
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 7 Days   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Weekly <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="w")
+  print(head(HotTopN_Weekly, n=hottopN))
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 24 Hours   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Daily <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="d")
+  print(head(HotTopN_Daily, n=hottopN))
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 1 Hour   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Hourly <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="h")
+  print(head(HotTopN_Hourly, n=hottopN))
+  message("")
+  message("")
+}
+
+
+# Get.Coin("BTC")  #  this function could be useful ?
+
+
+
+
+########################
+## Int Helper Constants
+########################
+
+zBil = 1000000000
+zMil = 1000000

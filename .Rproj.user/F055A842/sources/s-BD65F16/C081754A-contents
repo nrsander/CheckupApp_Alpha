@@ -1,0 +1,412 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###            GET            ###
+###            BAG            ###
+###          RETURNS          ###
+###         FUNCTIONS         ###
+###                           ###
+###                           ###
+###         *FORMERLY*        ###
+###        *COMPAREBAGS*      ###
+
+
+# Test
+#source("Checkup_PlayWithXts.R")
+
+# ------------------------------- #
+#  FUNCTIONS                      #
+# ------------------------------- #
+#
+#-- Get_BagReturnsXTS(...
+#        myListOfBags       = Load_UserInputBags(),
+#        denom              = "USD",                    # <--- 1   Combine into a single vector, e.g. ccParams
+#        timeframe_OHLCV    = "day",                    # <--- 2   "
+#        Periods            = 90,                       # <--- 3   "
+#        OHLC               = "C"                       # <--- 4   "
+#
+#-- Get_BagReturnsDF(...
+#        myListOfBags       = Load_UserInputBags(),
+#        denom              = "USD",
+#        timeframe_OHLCV    = "day",
+#        Periods            = 30,
+#        OHLC               = "C"
+#
+#
+#
+#------->>   Work-in-progress functions:   ------->>
+#
+#-- SetMaxY_Plot(y=5)
+#---- my.max(x)             (a necessary subfunction for SetMaxY_Plot)
+#                           (*need to add ability to remove NaN and Inf, but NA is decent progress so far)
+#
+#-- Get_BagReturnsDetailed(...
+#       (extreme work in progress)
+#
+#-- Test_BagReturns()
+#
+#-------------------------------- #
+
+Get_BagReturnsXTS <- function(myListOfBags=Load_UserInputBags(),denom="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {
+  # DOWNLOAD the data frame (numeric) of Bags' (undated but chronological) returns
+  returnsDf <- Get_BagReturnsDF(myListOfBags=myListOfBags,denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  # Find the dates associated with our returns data
+  backdoorGetDate <- MakeTimeSeries_Multiple(InputCoins=myListOfBags[[1]]$Coin[1],PairCoin=rep(denom,length(myListOfBags[[1]]$Coin)),timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  bGD <- cbind(backdoorGetDate[1],returnsDf)[,-1] # Make row name into Date/Datetime rather than at time 1->t {using a backdoor method}
+  Date <- rownames(bGD)
+  
+  # Attach dates to the returns DF
+  dfWithDateCol <- data.frame(returnsDf,Date)
+  dfWithDateCol <- dfWithDateCol[,c(length(dfWithDateCol),2:length(dfWithDateCol)-1)] # reorder so date is first, not last
+  dfWithDateCol$Date <- as.Date(dfWithDateCol$Date) # make date object # SHOULD BE POSIX of some type *** but doesn't matter when using dates only (not specific times)
+  
+  # Create the xts (multiline) of Bags' % returns over selected period
+  Bag.Returns <- xts(dfWithDateCol[,-1],order.by = dfWithDateCol$Date)
+  plot(Bag.Returns)
+  
+  # Plot the xts
+  print(plot(Bag.Returns))
+  
+  # are they weighted successfully? not 100% sure yet! early returns are promising.
+
+  message("Beep Boop Bop...")
+  #wait, why did i ever need this: ?
+  #true_ncol_of_xts <- length(Bag.Returns)/ncol(Bag.Returns)
+  #print(plot(Bag.Returns[(true_ncol_of_xts-Periods):true_ncol_of_xts])) # i use true_ncol_of_xts here since xts returns ncol=x*y=matrix area instead of ncol=x dimension
+  message("No... Bop Boop *Beep*.")
+
+  # return:
+  Bag.Returns
+}
+
+
+
+###  v-----( Where a lot of magic happens )-----v
+Get_BagReturnsDF <- function(myListOfBags=Load_UserInputBags(),denom="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {
+  
+  myBagTitles <- names(myListOfBags) #  store names of bags
+  numBags <- length(myListOfBags)    #  qty. of Bags to be processed in this request.
+  
+  #         * * * * * *
+  # ~~ THIS DOWNLOADS FROM CC!  ~~  by calling Get_CoinReturns(...) on *each* coin in *each* Bag
+  #         * * * * * *                # {Would be a great idea to intercept this and lookup if we've already downloaded the coin & timerange of this exact request} **
+  #
+  List_xts_ReturnsOnBags <- list()   #  a new List container to store the fruits of our many Get_CoinReturns(...) calls
+  for (i in 1:numBags) {
+    List_xts_ReturnsOnBags[[i]] <- Get_CoinReturns(myCoins=myListOfBags[[i]]$Coin,denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  } # For each bag i ... add xts of Bag j to our List
+  
+  # Name each List element after the Bag it represents
+  names(List_xts_ReturnsOnBags) <- myBagTitles
+  
+  # Show header of a List containing xts objects (List_xts_ReturnsOnBags), one for each input-Bag
+  #   Each xts object (matrix xts, to be exact) represents the returns over time (%) of each of Bag i's component coins.
+  message("Unweighted bag returns:")
+  head(List_xts_ReturnsOnBags)
+  
+  
+  
+  # { ^ This could be a valuable, powerful output in and of itself }
+  
+  # {   ... }
+  
+  # { v This could stand to be its own function, if you followed the above advice ^ }
+  
+  
+  
+  # Attach Weightings To Our Output
+  
+  # Wait... is this only default-weighting everything? *************************
+  
+  List_numeric_WeightedReturnsOnBags <- list()
+  for (i in 1:length(myListOfBags)) {
+    
+    #  Within each Bag...
+    
+    # Get the CustomWeights of Bag z  (regardless of... *v* ?? stupid?)
+    #cw <- myListOfBags[[z]]$CustomWeight
+    
+    # Is this Bag default- or custom-weighted?
+    if (anyNA(myListOfBags[[i]]$CustomWeight)) {
+      isBagDefaultWeighted <- TRUE
+    } else {
+      isBagDefaultWeighted <- FALSE
+    }
+    message("Are the coins in '",names(myListOfBags)[i],"' equally weighted?  ...  ",isBagDefaultWeighted)
+    
+    # Weight this Bag's returns (%) accordingly
+    if (!isBagDefaultWeighted) {
+      thisBagsWeightVec <- myListOfBags[[i]]$CustomWeight # Add custom weights provided by user
+    } else {
+      thisBagsWeightVec <- rep((1/ncol(List_xts_ReturnsOnBags[[i]])),(ncol(List_xts_ReturnsOnBags[[i]]))) # default = equal weight for all n coins in Bag i
+    }
+    # Sum the weighted (or default weighted) components into a 'total return (% x100)' vector [of numerics]. Then add it to the List.
+    List_numeric_WeightedReturnsOnBags[[i]] <- rowSums(List_xts_ReturnsOnBags[[i]] * thisBagsWeightVec)
+  }
+  
+  # Name each List element after the weighted Bag it represents
+  names(List_numeric_WeightedReturnsOnBags) <- myBagTitles
+  
+  # Combine the list elements (which are all numeric vectors now) into one data frame
+  df.WeightedBagReturns <- as.data.frame(List_numeric_WeightedReturnsOnBags) # convert to df
+  
+  # Return this combined data frame which contains a cumulative returns xts for each Bag (each in sum, that is; not coin-by-coin).
+  df.WeightedBagReturns # ** may want to remove all the 'Weighted's out of these names. Misleading.
+}
+
+
+
+#gcr <- Get_CoinReturns(Periods=365)  ##**
+#gcr##**^
+#plot(gcr,ylim=c(0,16))##**^
+#gcr##**^
+
+
+
+
+
+#
+#
+#
+# UH OH...
+# TWO OF THE SAME FUNCTION...
+#   1) defined in TSGenFunctions
+#   2) existed in CompareBags already
+#
+#
+#  #
+# #
+##
+#
+
+#=================================
+#  TS BASKET               (2+ ts)
+#    a.k.a.  Coin.Returns
+#=================================
+#PctPriceChg_cumul = the % chg/coin price since initial date in data (a.k.a. [Periods] __ ago)
+
+#- Generate the % Performance Matrix (PctPriceChg_cumul) for the Coins in tsBasket
+Get_CoinReturns <- function(myCoins=c("BTC","ETH","LTC","BCH"),denom="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {
+  # pair each myCoin with [one universal] PairCoin
+  Pair <- c()
+  for (i in 1:length(myCoins)) {Pair[i] <- denom}
+  
+  tsBasket <- MakeTimeSeries_Multiple(InputCoins=myCoins,PairCoins=Pair,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  
+  # Cumulative % price chg. thru period------------------
+  price0 <- c() # scalar; % G/L vs. initial price (p0) of time range
+  for (i in 1:length(tsBasket)) {
+    price0[i] <- as.numeric(tsBasket[[i]][1])
+    tsBasket[[i]] <- tsBasket[[i]] / price0[i]
+  }
+  myCoinReturns <- do.call(cbind, tsBasket)
+  # ^ If any of these columns are all NaN, the coin's ticker wasn't found. Return the appropriate error
+  # ^ ^ Actually, it's even worse. Right now, any coin tickers that are not equal between CMC and CC databases
+  # ^ ^ (e.g. IOTA, MIOTA) appear to be throwing errors. Avoid for now.
+  names(myCoinReturns) <- myCoins
+  
+  # return
+  myCoinReturns
+}
+
+
+
+
+
+
+## MAKE denom VECTORIZED! (Use rep() v v )    ********   
+Get_CoinReturns <- function(myCoins=c("BTC","ETH","LTC","BCH"),denom="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {
+##Get_CoinReturns <- function(myCoins=c("BTC","ETH","LTC","BCH"),denom=rep("USD",length(myCoins)),timeframe_OHLCV="day",Periods=90,OHLC="C") {
+  # ^ This f(x) definition is preparation for...
+  # ^^^^^ FIXING NON-VECTORIZED DENOMS !!! *****
+  # pair each myCoin with [the single, universal] PairCoin
+  
+  Pair <- c()
+  for (i in 1:length(myCoins)) {Pair[i] <- denom}
+  
+  # tsBasket = an xts object w/ multiple lines (individual coins over time)
+  tsBasket <- MakeTimeSeries_Multiple(InputCoins=myCoins,PairCoins=Pair,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  
+  
+  # Apply the scalar (Cumulative % price chg. thru period)
+  price0 <- c() # scalar; % G/L vs. initial price (p0) of time range     #
+  for (i in 1:length(tsBasket)) {
+      ### Find First Price That Isn't (NaN / NA / Inf)
+      ### Rather than the "1" that is currently here
+      ### Then you will plot things perfectly!
+      ### Maybe even explore replacing them with ____ (I don't know)
+    iNonNAindex <- which(!is.na(tsBasket[[i]]))
+    iFirstNonNA <- min(iNonNAindex)
+    iNonZeroindex <- which(tsBasket[[i]]$price != 0.00)
+    iFirstNonZero <- min(iNonZeroindex)
+    
+    # So far...
+    # We've covered...
+    #  -- NA and 0
+    # Have not covered...
+    #  -- NaN and Inf
+    # v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    iPoPo <- min(iFirstNonNA,iFirstNonZero)
+    price0[i] <- as.numeric(tsBasket[[i]][iPoPo])
+    
+    #># price0[i] <- as.numeric(tsBasket[[i]][1])                            #####     <<-------   ERROR!!!! THIS "1" HERE NEEDS TO BE "FIRST PRICE THIS ISN'T (NaN / NA / Inf) ************
+    tsBasket[[i]] <- tsBasket[[i]] / price0[i] # convert price to returns
+  }                                                                      #
+
+    
+  tsBasketCombined <- do.call(cbind, tsBasket)
+  names(tsBasketCombined) <- myCoins
+  #  ^   If any of these columns are all NaN, the coin's ticker wasn't found. Return the appropriate error
+  #  ^      - Actually, it's even worse. Right now, any coin tickers that are not equal between 
+  #  ^        CMC and CC databases (e.g. IOTA, MIOTA) appear to be throwing errors.
+  #  ^   Avoid those coins for now.
+
+  # Plot the multiline xts
+  print(plot(tsBasketCombined,ylim=c(0,8)))
+  # and return it
+  tsBasketCombined
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ====================================  ^ ^  EVERYTHING ABOVE THIS LINE = PERFECT  ^ ^  ==================================== #
+
+
+
+## EXTREME WORK IN PROGRESS    v v v v v    (see below)
+Get_BagReturnsDetailed <- function(myListOfBags=Init_Example_Bag_List(),denom="USD",timeframe_OHLCV="day",Periods=30,OHLC="C") {
+  numBags <- length(myListOfBags)
+  
+  rez <- list()
+  
+  # for each bag in myListOfBags...
+  for (i in 1:numBags) {
+    # ... get Bag i's *returns* xts object, then assign it to rez[[i]].
+    wip <- Get_CoinReturns(myCoins=myListOfBags[[i]],denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC) # add {xtsOfBag}[[i]] to rez[[i]].
+    rez[[i]] <- wip
+  }
+  # return *List* of *returns* xts objects (rez), one for each bag input (numBags = length(myListOfBags)).
+  rez
+}
+   #
+  ###
+ #####
+   #   
+   #
+  #
+ #
+# Really, it should be called... GetCoinReturns_Multiple(...)
+#
+#Get_BagReturns <- function(myListOfBags=Init_Example_Bag_List(),denom="USD",timeframe_OHLCV="day",Periods=30,OHLC="C") {
+#  # get this bag's dims
+#  numBags <- length(myListOfBags)
+#  equal.weight <- 1/numBags
+#  # prepare output list
+#  rez <- list()
+#  # for each bag in this List... get its RETURNS xts; assign that xts to rez[[i]].
+#  for (i in 1:numBags) {
+#    cr <- Get_CoinReturns(myCoins=myListOfBags[[i]],denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC) # get xts
+#    rez[[i]] <- cr # add to result list
+#  }
+#  
+#  # return list
+#  rez
+#}
+
+
+Set_Plot_MaxY <- function(y=5) {
+  
+  # *
+  # I dunno how to change axis without re-drawing the entire chart, and 
+  # I dunno how to get the right plot(...) args from inside this generic function
+  # *
+  
+  ###   ---   Totally Broken!!!   ---   ###
+  # v v v v v v v v v v v v v v v v v v v v
+  ## -- FIND MAX X (Wait what ???????) <-- Plot
+  #myMaxX <- 2.22
+  #for (i in 1:length(Bag.Returns)/ncol(Bag.Returns)) {
+  #  thisMaxX <- my.max(Bag.Returns[i])
+  #  message("This max X: ",thisMaxX)
+  #  if (is.infinite(thisMaxX)) {
+  #    myMaxX <- myMaxX
+  #  } else {
+  #    myMaxX <- max(myMaxX,thisMaxX)
+  #  }
+  #  message("Running max X: ",myMaxX)
+  #}
+  #message("")
+  #
+  ## -- FIND MAX Y (Wait what ???) <-- Plot
+  #myMaxY <- 2.22
+  #for (i in 1:ncol(Bag.Returns)) {
+  #  thisMaxY <- my.max(Bag.Returns[,i])
+  #  message("This maxY: ",thisMaxY)
+  #  if (is.infinite(thisMaxY)) {
+  #    myMaxY <- myMaxY
+  #  } else {
+  #    myMaxY <- max(myMaxY,thisMaxY)
+  #  }
+  #  message("Running maxY: ",myMaxY)
+  #}
+  #message("")
+  #message("Max X: ",myMaxX)
+  #message("Max Y: ",myMaxY)
+}
+
+# A necessary subfunction for Set_ReturnsPlotMaxY
+my.max <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=T), NA)
+
+
+#  (Stupid)                       #
+#-------------------------------- #
+#  TEST FUNCTION ...              #
+#-------------------------------- #
+#
+Test_BagReturns <- function(denom="USD",timeframe_OHLCV="day",Periods=30) {
+  
+  print(Init_Example_Bag_List()) # show an example List of Bags for structural reference
+  #  IDEAL GOAL:  Load ^ this in from a .csv file
+  #  STRUCTURE :  LIST -->  Each list element is a DF with columns:     -->     Coin   |   CustomWeight   |   DefaultWeight*      { * calculated, not from .csv }
+  
+  # init a blank list
+  output_xts.and.df <- list()
+  
+  ##-  Return:
+  ##      List containing...
+  ##          [[1]] DF version
+  ##          [[2]] XTS version
+  # [[1]]
+  ##- Get the full-fledged xts (multiline) object
+  #
+  BagReturnsXTS <- Get_BagReturnsXTS(myListOfBags=Init_Example_Bag_List(),denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC="C")
+  output_xts.and.df[[1]] <- BagReturnsXTS
+  print(plot(BagReturnsXTS))
+  # [[2]]
+  ##- Get a 'dumbed-down' version of BagReturnsXTS if you need one (type = df rather than xts) 
+  #     (kind of like when you have to use .xls rather than .xlsx for some dumb Excel compatibility reason)
+  BagReturnsDF <- Get_BagReturnsDF(myListOfBags=Init_Example_Bag_List(),denom=denom,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC="C")
+  output_xts.and.df[[2]] <- BagReturnsDF
+  
+  # Return the result container (List of 2)
+  names(output_xts.and.df) <- c("Results_test.XTS","Results_test.DF")
+  output_xts.and.df
+}

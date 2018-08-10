@@ -1,0 +1,23 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###         READINPUT         ###
+
+
+## Load UserBag into the environment
+## which is created within Inputs/myBag.csv
+
+LoadUserBag <- function() {
+  message("Reading myBag.csv\t(0%)")
+  UserBag <- read.csv(file = "Inputs/myBag.csv", header = TRUE)
+  UserBag
+  PrintInputSuccess("UserBag")
+}
+
+LoadUserBag()
+print(UserBag)

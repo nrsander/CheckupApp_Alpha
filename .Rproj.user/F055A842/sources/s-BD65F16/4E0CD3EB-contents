@@ -1,0 +1,92 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           TSGen           ###
+###         FUNCTIONS         ###
+
+###<require> CCScript
+
+
+
+## Make Time Series
+MakeTimeSeries <- function(InputCoin="BTC",PairCoin="USD",Days=365,OHLC="C") {
+  priceCol <- 2
+  if (OHLC == "C") {
+    priceCol <- 2
+  } else if (OHLC == "H") {
+    priceCol <- 3
+  } else if (OHLC == "L") {
+    priceCol <- 4
+  } else if (OHLC == "O") {
+    priceCol <- 5
+  } else {
+    priceCol <- 2
+  }
+  
+  # Download [InputCoin]'s *daily* OHLCV Data, denominated in [PairCoin], from [Days] days ago  --->  Current
+  df <- GetCoinHistoData(InputCoin,PairCoin,"day",Days) # because the time portion messes up plotting x axis titles
+  df$time <- as.Date(df$time, "%Y-%M-%D") # ...aka limits us to using only Daily data (simple df$time to parse)
+
+  # Generate the time series object
+  dfts = ts(df[, c(priceCol)], start=c(2017,05,02),frequency=365)
+  names(dfts) <- df$time
+  
+  # Plot the price time series
+  plot(dfts,main=InputCoin,ylab=paste0(InputCoin," Price (",PairCoin,")"),xlab=paste0("Date (Last ",Days," days)"))
+  plot(diff(dfts), type = "l", main = paste0(InputCoin," Price (differenced)"),xlab=paste0("Date (Last ",Days," days)"),ylab=paste0(InputCoin,"-",PairCoin," Price (differenced)"))
+  
+  # Print the ts
+  dfts
+  
+  ?seq
+}
+
+myTS <- MakeTimeSeries("BTC","USD",14,"C")
+myTS
+
+# df$time <- as.Date(df$time, "%Y-%M-%D")
+# plot(dfts, xaxt = "n", type = "l")
+# axis(1, dfts$Date, format(df$Date, "%b %d"), cex.axis = .7)
+
+
+
+
+
+
+
+# dummy data
+
+
+##  (A) Compare Coins Over Time 
+one <- 1:length(myTS)
+one # Time
+two <- myTS[1:length(myTS)]
+two # Price (needs to be relative tho...)
+three <- rep(paste0("Coin", 1:6), each=61)
+three # Coins
+
+# init 3d df
+xff <- data.frame(x=one, val=two, variable=three)
+#View(xff)
+# plot
+ggplot(data = xff, aes(x=x, y=val)) + geom_line(aes(colour=variable))
+
+
+
+
+
+
+##  (B) Compare Relative Bag Performance
+one <- rep(1:9, 5)
+one # Time
+two <- sample(1:100, 45)
+two # TotVal [Relative value in period]
+three <- rep(paste0("Bag", 1:5), each=9)
+three # Bags
+
+

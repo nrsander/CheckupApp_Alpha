@@ -1,0 +1,12 @@
+btc <- forecast
+
+
+
+str(btc)
+
+btc$ds
+
+
+str(btc$ds)
+# test for day of week
+# day of month (2nd fridays?)

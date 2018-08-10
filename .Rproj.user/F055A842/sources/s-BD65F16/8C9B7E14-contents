@@ -1,0 +1,37 @@
+
+
+
+
+ts_list <- vector("list", length = length(myBag))
+
+str(ts_list)
+
+for i in 1:length(myBag) {
+  
+  df <- GetCoinHistoData(myBag[i],"USD","minute",12*60) # because the time portion messes up plotting x axis titles
+  df
+  
+  df <- df[,c(1,2)]
+  plot(df)
+  
+  
+  d <- MakeTimeSeries(InputCoin=myBag[i],PairCoin="USD",Days=90,OHLC="C")
+  d
+  ts_list[i] <- d
+  
+}
+
+
+
+
+BagGen <- function(coin,qty,weight) {
+  bag <- data.frame(coin)
+  
+  
+}
+
+
+
+
+MakeTimeSeries(InputCoin="BTC",PairCoin="USD",Days=365,OHLC="C")
+#MakeTimeSeries(InputCoin="BTC",PairCoin="USD",Days=365,OHLC="C")

@@ -1,0 +1,18 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###          EXPORT           ###
+###            BAG            ###
+###          RETURNS          ###
+###  (should be more generic) ###
+
+
+Export_BagReturns_CSV <- function(myBagXTS) {
+  write.csv(myBagXTS, paste0(swd,"/Outputs/UserBagReturns/","BagReturns_Export",".csv"),row.names=F)
+}
+

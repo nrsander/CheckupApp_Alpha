@@ -1,0 +1,203 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###            CC             ###
+###         FUNCTIONS         ###
+
+
+##########################
+###    CC Functions    ###
+##########################
+
+    ##   Return OHLCV Time-Series Data
+    ######################################################
+    ##   ---  GetCoinTimeSeries        (single coin)
+    ##   ---  GetBagTimeSeries         (multiple coins)
+
+
+    ##   Print Bag Details
+    ######################################################
+    ##   ---  Print_BagReport
+    ##   ---  Print_BagHeads           (most recent 5 periods of OHLCV)
+
+
+    ##   Get Historical Price of Coin at Given Time/Date
+    ######################################################
+    ##   ---  GetPriceAtTimestamp      (any coin)
+    ##          -  GetBTCAtTimestamp   (BTC)
+    ##          -  GetETHAtTimestamp   (ETH)
+
+
+
+### ---  Get Coin Time-Series
+
+GetCoinTimeSeries <- function(InputCoin="ETH",PairCoin="BTC",timeframe="hour",pd) {
+  ##  Timeframe Options:    hour    minute    day
+  ##  Period:               How many (timeframe)s do you want to load? 1000 days? 9000 hours? really should be common periods/sample sizes when comparing coins.
+  
+  ##    start using some %>%'s in this bitch ... 
+  #pd=1000
+  message("   Downloading ", InputCoin, " OHLC data... (0%)")
+  
+  ## API call
+  url <- paste0("https://min-api.cryptocompare.com/data/histo", timeframe, "?fsym=", InputCoin, "&tsym=", PairCoin, "&allData=true", collapse = "")
+  coin.histo <- fromJSON(url)
+  
+  if (coin.histo$Response != "Success") {
+    message("         ERROR [Critical]:          '",InputCoin,"' does not match any coins in the data repository.")
+    message("         ",coin.histo$Response, "  ",coin.histo$Message)
+    coin.data <- NA
+  } else {
+    # coin.data
+    coin.data <- coin.histo$Data
+    #str(coin.data)
+    coin.data$time <- as_datetime(coin.data$time)
+    # Order by date, descending
+    # ...............
+    head(coin.data)
+    message("   Downloading ", InputCoin, " OHLC data... (100%)")
+    message("   Success! ", InputCoin, " OHLC data is now available.")
+    message("        Pair:        ", InputCoin,"-",PairCoin)
+    if (timeframe == "day") {
+      message("        Timeframe:   ", pd, " Days")
+    } else if (timeframe == "hour") {
+      message("        Timeframe:   ", pd, " Hours")
+    } else if (timeframe == "minute") {
+      message("        Timeframe:   ", pd, " Minutes")
+    } else {
+      message("        Timeframe:   ", pd, " [ERROR]")
+    }
+  }
+  coin.data
+}
+# zrx <- GetCoinTimeSeries(InputCoin="ZRX",PairCoin="BTC",timeframe="hour",pd=1000)
+# View(zrx)  # Time-series (1000 hours of data) data of ZRX's OHLC prices & to/from volume
+
+
+
+
+### ---  Get Bag Time Series
+
+GetBagTimeSeries <- function(Bag,PairCoin="BTC",timeframe,pd) {
+  # pd = Retrieve the same ___x_number___ of most-recent rows for each coin
+  
+  #defaultbag <- c("ETH","LTC","XLM","XRP")
+  #if (Bag == defaultbag) {
+  #  message("{{ --- Default Bag Detected --- }}")
+  #}
+  
+  # Create a blank list
+  datalist = list()
+  # For each coin in Bag...
+  for (i in 1:length(Bag)) {
+    inputCoin = Bag[i]
+    message("Coin ",i,") ",inputCoin)
+    if (inputCoin == "BTC") {PairCoin <- "USD"}
+    chist <- GetCoinTimeSeries(InputCoin=inputCoin,PairCoin,timeframe,pd)
+    chist <- chist[order(chist$time, decreasing = TRUE),]
+    datalist[[i]] <- chist[1:pd,]
+    message("")
+  }
+  message("Bag created!   (# of coins: ", length(datalist),")")
+  names(datalist) <- Bag[1:length(Bag)] 
+  # Return list of bag data
+  datalist 
+}
+
+
+
+### ---  Print Bag Contents
+
+Print_BagContents <- function(myBag) {
+  # Print a short summary report on the coins in the bag
+  message("")
+  message(".------------------------------------.")
+  message("| # Coins:   ", length(myBag))
+  message("'------------------------------------'")
+  for (i in 1:length(myBag)) {
+    message("| Coin ",i,":    ",names(myBag)[i])
+    errs <- sum(is.na(myBag[[i]][["close"]]))
+    if (errs > 0) {
+      message("              * Errors:   ",errs," / ",length(get("close",myBag[[i]])))
+    }
+    #close <- get("close", myBag[[i]])
+    #message("Mean USD price: $",round(mean(close) * GetBTCAtTimestamp(),2), "             ","Mean BTC price: ",round(mean(close),8), " BTC")
+  }
+  message("'------------------------------------'")
+  message("")
+}
+#Print_BagContent(CoinsData)
+
+
+
+### ---  Print Bag Heads
+
+Print_BagHeads <- function(myBag) {
+  # Print the head() [=the most recent 5 periods of OHLCV data] of each coin in the bag
+  for (i in 1:length(TestBag)) {
+    message("----------------------------------------------------------------------------------")
+    print(names(TestBag[i]))
+    message("----------------------------------------------------------------------------------")
+    print(head(TestBag[[i]]))
+  }
+}
+#Print_BagHeads(myBag)
+
+
+
+### ---  Get Price [of any coin] At Timestamp
+
+GetPriceAtTimestamp <- function(InputCoin="BTC",PairCoin="USD",TimestampForPrice=1516503600) {
+  url <- paste0("https://min-api.cryptocompare.com/data/pricehistorical", "?fsym=", InputCoin, "&tsyms=", PairCoin, "&ts=", TimestampForPrice, collapse = "")
+  jdata <- fromJSON(url)
+  jprice <- jdata[[1]][[1]]
+  jprice
+}
+#price <- GetPriceAtTimestamp(InputCoin="ETH",PairCoin="USD",TimestampForPrice = 1516503600)
+#price
+
+
+
+
+### ---  Get BTC [Price] At Timestamp
+
+GetBTCAtTimestamp <- function(TimestampForPrice=1516503600) { # random timestamp is default
+  if (TimestampForPrice==1516503600) {
+    #message("WARNING: I detect that the historical Bitcoin prices being downloaded may not be what you requested. Did you specify the timestamp properly?")
+    #message("Continuing anyway...")
+  }
+  InputCoin="BTC"
+  PairCoin="USD"
+  btcurl <- paste0("https://min-api.cryptocompare.com/data/pricehistorical", "?fsym=", InputCoin, "&tsyms=", PairCoin, "&ts=", TimestampForPrice, collapse = "")
+  bdata <- fromJSON(btcurl)
+  bprice <- bdata[[1]][[1]]
+  bprice
+}
+#GetBTCAtTimestamp(1506753833)
+
+
+### ---  Get ETH [Price] At Timestamp
+
+GetETHAtTimestamp <- function(TimestampForPrice=1516503600) { # random timestamp is default
+  if (TimestampForPrice==1516503600) {
+    #message("WARNING: I detect that the historical Ethereum prices being downloaded may not be what you requested. Did you specify the timestamp properly?")
+    #message("Continuing anyway...")
+  }
+  InputCoin="ETH"
+  PairCoin="USD"
+  ethurl <- paste0("https://min-api.cryptocompare.com/data/pricehistorical", "?fsym=", InputCoin, "&tsyms=", PairCoin, "&ts=", TimestampForPrice, collapse = "")
+  edata <- fromJSON(ethurl)
+  eprice <- edata[[1]][[1]]
+  eprice
+}
+#GetETHAtTimestamp(1516503000)
+
+
+
+
+

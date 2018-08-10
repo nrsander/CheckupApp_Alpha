@@ -1,0 +1,63 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###            CC             ###
+###          SCRIPT           ###
+
+message("Running CCScript... (0%)")
+
+
+##  Data Validation
+pds = 123 #arb default
+if (myTimeframe == "day") {
+  pds = daysOfData
+} else if (myTimeframe == "hour") {
+  pds = daysOfData * 24
+} else if (myTimeframe == "minute") {
+  pds = daysOfData * 24 * 60
+} else {
+  message ("ERROR..... Inappropriate timeframe!")
+  message ("Crashing now. Goodbye!")
+}
+message("")
+
+
+##  Build-a-Bag
+TestBag <- GetBagHistoData(Bag=myBag,PairCoin="BTC",myTimeframe,pds) # List of the Bag's coins' Histo-Datas
+
+
+##  Print bag's contents (the coin names)
+Print_BagContents(TestBag)
+
+message("CCScript complete.")
+
+
+
+
+
+
+
+
+#t <- get("time", CoinsData[[1]])
+#t
+#c <- get("close", CoinsData[[1]])
+#c
+
+#head(CoinsData[[1]])
+#View(CoinsData[[1]])
+#View(CoinsData[[2]])
+#View(CoinsData[[...]])
+#View(CoinsData[[N]])
+
+#pp.secs <- df$time
+#pp.mins <- df$time/60
+#pp.hrs <- df$min/60
+#pp.days <- df$hrs/24
+#pp.weeks <- df$days/7
+#pp.years <- df$days*365
+#pp.months <- df$years/12

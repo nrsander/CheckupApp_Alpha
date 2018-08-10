@@ -1,0 +1,59 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###       DEPENDENCIES        ###
+
+message("Loading dependencies... (0%)")
+
+## ============== ##       >>
+#  STARTUP PARAMS  #  =====  >>
+## ============== ##       >>
+
+
+########################################################################
+## Working Directory                                                  ##
+########################################################################
+
+# Where's the working directory?
+message("Setting up home base...")
+swd <- "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp"
+setwd(swd)
+message("Home base established.")
+message("       Working directory  ---,")
+message("                             '---->    ",swd)
+
+########################################################################
+## Load Startup Dependencies                                          ##
+########################################################################
+
+# Common Sources:
+source("Checkup_CMCFunctions.R")
+source("Checkup_CCFunctions.R")
+source("Checkup_PortfolioFunctions.R")
+source("Checkup_PrintReports.R")
+#not all of these are common but i don't have the time or need to try to figure out which ones
+#until the code starts to take too long to run or we get unforeseen memory issues ...
+
+# Libraries:
+library(coinmarketcapr) # neat
+library(rvest) # read web data
+library(jsonlite) # downloading CC API and other internet stuff someday
+library(dplyr) # getting our hands dirty with Big Data
+library(stringr) # better text
+library(forecast) # forecasting
+library(plotrix) # plotting utility
+library(tidyr) # clean data is better data
+library(ggplot2) # visualization
+library(lubridate) # date times
+library(scales) # plotting ts
+library(gridExtra) # plotting ts
+library(ggthemes) # plotting ts
+#library(crypto) # doesn't work
+
+
+message("Dependencies loaded (100%)")

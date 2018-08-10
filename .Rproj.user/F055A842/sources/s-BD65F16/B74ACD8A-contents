@@ -1,0 +1,145 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           TSGen           ###
+###         FUNCTIONS         ###
+###
+
+
+#=================================
+#  SINGLE TS                (1 ts)
+#=================================
+#PRICE time series; *NOT %* gain/loss
+
+#- Make Time Series
+MakeTimeSeries <- function(InputCoin="BTC",PairCoin="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {  # options for timeframe_OHLCV...   "day"  |  hour"  |  "minute"
+  ##===== TS & PLOTTING =====================
+  ##--- Coin ---
+  ## Price of:            [InputCoin]...
+  ## denominated in:      [PairCoin]...
+  ##--- Date Range ---
+  ## From:                [Periods] ago  
+  ## to:           --->   Current time...         <----  SHOULD BE MADE CUSTOM !!  OH WELL !!
+  ##--- Criteria ---
+  ## At each (interval):  [timeframe_OHLCV]...
+  ##--- Touch Ups ---
+  ## but only utilize:    [O/H/L/C] to be the "price" as used in the time series; ignore the rest (for now*)       #(*time series w/ candlesticks in a future update)
+  
+  df <- GetCoinHistoData(InputCoin,PairCoin,timeframe_OHLCV,Periods)
+  
+  # Adjust for OHLC selection
+  priceCol <- 2
+  if (OHLC == "C") {
+    priceCol <- 2
+  } else if (OHLC == "H") {
+    priceCol <- 3
+  } else if (OHLC == "L") {
+    priceCol <- 4
+  } else if (OHLC == "O") {
+    priceCol <- 5
+  } else {
+    priceCol <- 2
+  }
+ 
+  ## Create the xts object
+  df.xts = xts(x=df[priceCol], order.by=df$time)
+
+  df.xts
+}
+
+#- Make Time Series (Multiple input coins)
+MakeTimeSeries_Multiple <- function(InputCoins=c("BTC","ETH","XMR"),PairCoins=c("USD","USD","USD"),timeframe_OHLCV="day",Periods=90,OHLC="C") {  # options for timeframe_OHLCV...   "day"  |  hour"  |  "minute"
+    ##===== TS & PLOTTING =====================
+    ##--- Coin ---
+    ## Price of:            [InputCoin]...
+    ## denominated in:      [PairCoin]...
+    ##--- Date Range ---
+    ## From:                [Periods] ago  
+    ## to:           --->   Current time...         <----  SHOULD BE MADE CUSTOM !!  OH WELL !!
+    ##--- Criteria ---
+    ## At each (interval):  [timeframe_OHLCV]...
+    ##--- Touch Ups ---
+    ## but only utilize:    [O/H/L/C] to be the "price" as used in the time series; ignore the rest (for now*)       #(*time series w/ candlesticks in a future update)
+  
+  # OHLC selection
+  priceCol <- 2
+  if (OHLC == "C") {
+    priceCol <- 2
+  } else if (OHLC == "H") {
+    priceCol <- 3
+  } else if (OHLC == "L") {
+    priceCol <- 4
+  } else if (OHLC == "O") {
+    priceCol <- 5
+  } else {
+    priceCol <- 2
+  }
+  
+  # blank list
+  returnList = list()
+  
+  # add each coin's xts time series to the list
+  for (i in 1:length(InputCoins)) {
+    
+    # -- Get HISTO DATA:
+    df <- GetCoinHistoData(InputCoins[i],PairCoins[i],timeframe_OHLCV,Periods)
+    
+    #strip non-selected OHLCs
+    df <- df[,c(1,priceCol,6,7)]
+    #strip volumes
+    df <- df[,c(1,2)]
+    #now only the time and [price] columns remain.
+    
+    # -- Other HistoData manipulation:
+    # N/A
+    
+    # -- Create TIME SERIES:
+    df.xts <- xts(x=df[2], order.by=df$time)
+    names(df.xts) <- c("price") #this may help or hurt. we'll find out
+    
+    # -- Finalize, add the time series to LIST:
+    returnList[[i]] <- df.xts
+  }
+  
+  returnList
+}
+
+
+
+
+#=================================
+#  TS BASKET               (2+ ts)
+#    a.k.a.  Coin.Returns
+#=================================
+#PctPriceChg_cumul = the % chg/coin price since initial date in data (a.k.a. [Periods] __ ago)
+
+#- Generate the % Performance Matrix (PctPriceChg_cumul) for the Coins in tsBasket
+Get_CoinReturns <- function(myCoins=c("BTC","ETH","LTC","BCH"),denom="USD",timeframe_OHLCV="day",Periods=90,OHLC="C") {
+  # pair each myCoin with [one universal] PairCoin
+  Pair <- c()
+  for (i in 1:length(myCoins)) {Pair[i] <- denom}
+  
+  tsBasket <- MakeTimeSeries_Multiple(InputCoins=myCoins,PairCoins=Pair,timeframe_OHLCV=timeframe_OHLCV,Periods=Periods,OHLC=OHLC)
+  
+  # Cumulative % price chg. thru period------------------
+  price0 <- c() # scalar; % G/L vs. initial price (p0) of time range
+  for (i in 1:length(tsBasket)) {
+    price0[i] <- as.numeric(tsBasket[[i]][1])
+    tsBasket[[i]] <- tsBasket[[i]] / price0[i]
+  }
+  myCoinReturns <- do.call(cbind, tsBasket)
+  # ^ If any of these columns are all NaN, the coin's ticker wasn't found. Return the appropriate error
+  # ^ ^ Actually, it's even worse. Right now, any coin tickers that are not equal between CMC and CC databases
+  # ^ ^ (e.g. IOTA, MIOTA) appear to be throwing errors. Avoid for now.
+  names(myCoinReturns) <- myCoins
+
+  # return
+  myCoinReturns
+}
+
+

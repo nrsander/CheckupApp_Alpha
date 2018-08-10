@@ -1,0 +1,18 @@
+
+
+
+
+start.date <- c(2018,01,01)
+end.date <- c(2018,05,04)
+
+GetPricesThroughDateRange <- function(start.date,end.date,) {
+  
+  start.date <- as.numeric()
+  
+  histPriceVec <- GetPricesOnDate(c(YYYY,MM,DD),coins,denom,1)
+  
+  for i in 1:
+    
+    
+}
+

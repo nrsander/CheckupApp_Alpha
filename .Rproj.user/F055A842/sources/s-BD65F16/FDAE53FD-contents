@@ -1,0 +1,153 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+#|+ *(    C H E C K U P    )* +|#
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           PRINT           ###
+###          REPORTS          ###
+
+
+
+
+
+###########################################################################################
+##                                        CMCScript                                      ##
+###########################################################################################
+
+
+
+##############################
+##  Print Hot Top N Report  ##
+##############################
+
+# PrintHotTopNReport
+PrintHotTopNReport <- function(searchThruRank, hottopN) {
+  message("")
+  message("")
+  message(".****************************************************************************************.")
+  message("| HOT TOP ", hottopN, "  over last...        7 Days    /    24 Hours    /    1 Hour                |")
+  message("'****************************************************************************************'")
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 7 Days   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Weekly <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="w")
+  print(head(HotTopN_Weekly, n=hottopN))
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 24 Hours   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Daily <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="d")
+  print(head(HotTopN_Daily, n=hottopN))
+  message("")
+  message(" Hot Top ", hottopN, "           //   Last 1 Hour   //")
+  message("----------------------------------------------------------------------------------------")
+  HotTopN_Hourly <- Get.HotTopX(CoinsThruRank=searchThruRank, TimePeriod="h")
+  print(head(HotTopN_Hourly, n=hottopN))
+  message("")
+  message("")
+}
+
+# Print Snapshot Success Report
+PrintSnapshotSuccessReport <- function(tod,fileName,wd) {
+  message("")
+  message("")
+  message("._______.           ")
+  message("|  <+>  |    SAVED! ")
+  message("|=======|____________.")
+  message("|        _____      ||")
+  message("|       |  .  |     ||")
+  message("|      {  {+}  }    ||")
+  message("|       |_____|     ||")
+  message("|___________________||")  
+  message("")
+  message("*** SNAPSHOT ARCHIVED ***********************************************************")  
+  message("*           Date:    ",tod)
+  message("*           File:    ",fileName)
+  message("*      Directory:    ",wd)
+  message("*********************************************************************************") 
+  message("")
+  message("")
+  message("")
+}
+
+
+
+###########################################################################################
+##                                        CCScript                                       ##
+###########################################################################################
+
+# Print Bag Contents
+Print_BagContents <- function(myBag) {
+  # Print a short summary report on the coins in the bag
+  message("")
+  message(".------------------------------------.")
+  message("| # Coins:   ", length(myBag))
+  message("'------------------------------------'")
+  for (i in 1:length(myBag)) {
+    message("| Coin ",i,":    ",names(myBag)[i])
+    errs <- sum(is.na(myBag[[i]][["close"]]))
+    if (errs > 0) {
+      message("              * Errors:   ",errs," / ",length(get("close",myBag[[i]])))
+    }
+    #close <- get("close", myBag[[i]])
+    #message("Mean USD price: $",round(mean(close) * GetBTCAtTimestamp(),2), "             ","Mean BTC price: ",round(mean(close),8), " BTC")
+  }
+  message("'------------------------------------'")
+  message("")
+}
+#Print_BagContent(CoinsData)
+
+
+
+# Print Bag Heads
+Print_BagHeads <- function(myBag) {
+  for (i in 1:length(TestBag)) {
+    # Print the head() [=the most recent 5 periods of OHLCV data] of each coin in the bag
+    message("----------------------------------------------------------------------------------")
+    print(names(TestBag[i]))
+    message("----------------------------------------------------------------------------------")
+    print(head(TestBag[[i]]))
+  }
+}
+#Print_BagHeads(myBag)
+
+
+
+
+
+
+###########################################################################################
+##                                    PortfolioScript                                    ##
+###########################################################################################
+
+
+
+
+
+
+
+
+###########################################################################################
+##                                      HistCCScript                                     ##
+###########################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################
+##  Other Reports
+###########################
+
+# ...

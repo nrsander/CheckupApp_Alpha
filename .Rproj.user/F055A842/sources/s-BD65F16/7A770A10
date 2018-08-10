@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527536218661.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7A770A10",
+    "lastKnownWriteTime" : 8589869059,
+    "last_content_update" : 1527536218661,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "5848fe7a4c4e41ffbd257431a6e2b778",
+        "name" : "List_HistoCloses",
+        "title" : "List_HistoCloses"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527467285209.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "54BCD932",
+    "lastKnownWriteTime" : 1527646331,
+    "last_content_update" : 1527646331818,
+    "path" : "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp/Checkup_GetHistoricalPrices.R",
+    "project_path" : "Checkup_GetHistoricalPrices.R",
+    "properties" : {
+        "cursorPosition" : "19,122",
+        "scrollLine" : "1",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,47 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###            CC             ###
+###          SCRIPT           ###
+
+message("Running CCScript... (0%)")
+
+##  Data Validation
+pds = 123 #arb default
+if (myTimeframe == "day") {
+  pds = daysOfData
+} else if (myTimeframe == "hour") {
+  pds = daysOfData * 24
+} else if (myTimeframe == "minute") {
+  pds = daysOfData * 24 * 60
+} else {
+  message ("ERROR..... Inappropriate timeframe!")
+  message ("Must be either __day__, __hour__, or __minute__.")
+  message ("No underscores, obviously. (No quotes, either.)")
+  message ("...")
+  message ("Crashing now. Goodbye!")
+}
+message("")
+
+
+##  Build-a-Bag   
+TestBag <- GetBagHistoData(Bag=myBag,PairCoin="BTC",myTimeframe,pds) # List of the Bag's coins' Histo datas
+#     Each DF is one coin
+#     The rows within the DF have the OHLCV data
+#     at each {day|hour|minute} going back {daysOfData} days in time.
+#           [Horizon of time to go back thru:   {daysOfData} ago   ....>   Now]
+##  Make adjustments
+
+
+##  Print bag's contents (stupid; just the coins' names)
+Print_BagContents(TestBag)
+
+message("CCScript complete.")
+
+
+

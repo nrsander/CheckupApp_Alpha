@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527301756831.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "84|40|94|0|\n97|32|129|0|\n132|38|141|0|\n",
+    "hash" : "0",
+    "id" : "671ED1C0",
+    "lastKnownWriteTime" : 1527372850,
+    "last_content_update" : 1527372850795,
+    "path" : "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp/Checkup_MList.R",
+    "project_path" : "Checkup_MList.R",
+    "properties" : {
+        "cursorPosition" : "27,2",
+        "scrollLine" : "20",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

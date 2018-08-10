@@ -1,0 +1,27 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###        PORTFOLIO          ###
+###          SCRIPT           ###
+message("")
+message("Running PortfolioScript... (0%)")
+
+
+## Construct Portfolio
+portfolio <- ConstructPortfolio(myBag,myQtys)
+
+## Print Portfolio
+PrintPortfolio(portfolio)
+
+
+message("PortfolioScript complete.")
+message("")
+
+
+
+

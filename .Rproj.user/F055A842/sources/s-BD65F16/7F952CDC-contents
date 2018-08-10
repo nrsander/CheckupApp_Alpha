@@ -1,0 +1,42 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###         READINPUT         ###
+
+
+## Load UserBag into the environment
+## which is created within Inputs/myBag.csv
+
+#-
+PrintInputSuccess <- function(InputTitle="[CheckupApp input]") {
+  message("")
+  message("   |")
+  message("   |   Reading...")
+  message("   |   input...")
+  message("   |")
+  message(" \\ | /")
+  message("   V")
+  message(InputTitle)
+  message("")
+  message("Success.\t\t(100%)")
+}
+
+#-
+LoadUserBag <- function() {
+  message("Reading myBag.csv\t(0%)")
+  UserBag <- read.csv(file = "Inputs/myBag.csv", header = TRUE)
+  PrintInputSuccess("UserBag")
+  UserBag
+}
+
+
+
+UserBag <- LoadUserBag()
+print(UserBag)
+
+

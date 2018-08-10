@@ -1,0 +1,87 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+#|+ *(    C H E C K U P    )* +|#
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###         FUNCTIONS         ###
+
+
+
+
+Snapshot <- function() {
+  tod <- today()
+  fileName = paste(tod,"_Top",LimitCoinQuantity,"CMC",".csv",sep="")
+  file <- write.csv(CMC,fileName)
+  
+  # Print Success Report
+  message("._______.")
+  message("|  <+>  |")
+  message("|=======|____________.")
+  message("|        _____      ||")
+  message("|       |  .  |     ||")
+  message("|      {  {+}  }    ||")
+  message("|       |_____|     ||")
+  message("|___________________||")  
+  message(" ")
+  message("** SNAPSHOT TAKEN ***************************************************************")  
+  message("*     Directory:     ",getwd())
+  message("*          File:     ",fileName)
+  message("*          Date:     ",tod)
+  message("*********************************************************************************") 
+  message(" ")
+}
+
+
+
+
+
+
+
+
+# MISSING!
+# (NEVER GETS CREATED)
+# ...
+# top_X_mcap
+
+
+
+
+
+
+
+# Get.Coin
+# Get.Coin("ABC")
+Get.Coin <- function(ticker) {
+  df <- top_X_mcap[top_X_mcap$symb == ticker,]
+  df
+}
+
+
+# Get.HotTopX
+# Get.HotTopX(CoinsThruRank=100, TimePeriod="[h/d/w]")
+Get.HotTopX <- function(CoinsThruRank=100,TimePeriod) {
+  
+  if (TimePeriod =="h") {
+  df <- arrange(.data = top_X_mcap[1:CoinsThruRank,], desc(ch1h))
+  } else if (TimePeriod == "d") {
+    df <- arrange(.data = top_X_mcap[1:CoinsThruRank,], desc(ch24h))
+  } else if (TimePeriod == "w") {
+    df <- arrange(.data = top_X_mcap[1:CoinsThruRank,], desc(ch7d))
+  } else {
+    df <- arrange(.data = top_X_mcap[1:100,], desc(ch24h))
+  }
+}
+
+
+
+
+
+########################
+## Int Helper Constants
+########################
+
+zBillion = 1000000000
+zMillion = 1000000

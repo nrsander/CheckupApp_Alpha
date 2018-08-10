@@ -1,0 +1,56 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           CCHist          ###
+###           SCRIPT          ###
+
+
+
+  
+
+message("")
+message("Starting CCHistScript ... (0%)")
+message("")
+
+# ------------------< INPUTS >------------------|
+
+MM <- 04
+DD <- 28
+YYYY <- 2018
+
+coins <- myBag
+
+denom <- "USD"  # "USD" or "BTC"
+
+
+
+# ------------------< SCRIPT >------------------|
+
+#today <- today()
+#today <- str_split(today,pattern="-")
+#today[[1]][1]
+
+
+histPriceVec <- GetPricesOnDate(c(YYYY,MM,DD),coins,denom,1)
+
+message("Coin prices (numeric vector):")
+View(histPriceVec) # a simple numeric vector!
+
+
+#ts_BTC_USD <- MakeTimeSeries(InputCoin="BTC",PairCoin="USD",Days=90,OHLC="C")
+message("")
+
+
+
+
+
+
+
+
+message("CCHistScript complete.")
+

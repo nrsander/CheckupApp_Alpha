@@ -1,0 +1,149 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###          CCHist           ###
+###         FUNCTIONS         ###
+
+
+#----------------------------------------------------------,
+#     ,,,,,,,,,,,,,                                        |
+#-----| FUNCTIONS |--\----------------------\--------------'
+#     ''''''''''''     \                      \
+#                        \                      \
+#     GET PRICES ON DATE  |   c(YYYY,MM,DD),     |
+#                         |   c("XLM","BAT",...) |
+#                         |   "USD"  |  "BTC"    |
+#                        /   0/1 print $ msgs   /
+#                    ----\----------------------\
+#      GET PRICE ON DATE  |   "YYYY","MM","DD"   |
+#------------------------/----------------------/
+#                        \                      \
+#  GET PRICE ON DATETIME  |   "Y", "M", "D",     |
+#                         |   "H", "M", "S",     |
+#                         |   "Tz"               |
+#------------------------/----------------------/
+#                        \                      \
+#    GET UNIX TIMESTAMP_  |   Date-Time          |
+#                    ----/----------------------/
+#                        \                      \
+#    GET UNIX TIMESTAMP_  |   *Only* Date        |
+#                    ----/----------------------/
+#                        \                      \
+#  DECODE UNIX TIMESTAMP  |   UNIX --> numeric   |
+#-------------------------'---------------------/
+
+
+GetPricesOnDate <- function(dateVec,tckrs,denom,showMsgs) {
+  message("Downloading historical prices ...")
+  ret <- c()
+  
+  # Make strings for CC API calls
+  YYYY <- as.character(dateVec[1])
+  MM <- as.character(dateVec[2])
+  DD <- as.character(dateVec[3])
+  
+  # Data validation
+  
+  #!turn input into uppercase characters!
+  if (nchar(YYYY) == 2) {
+    YYYY <- paste0("20",YYYY)
+    #YYYY <- paste("20",YYYY)
+  }
+  if (nchar(MM) == 1) {
+    MM <- paste0("0",MM)
+  }
+  if (nchar(DD) == 1) {
+    DD <- paste0("0",DD)
+  }
+  if (denom == "$") {
+    denom <- "USD"
+  }
+  symb <- ""
+  symb2 <- ""
+  roundTo <- 8
+  if (denom == "USD") {
+    symb <- "$"
+    symb2 <- ""
+    roundTo <- 2
+  } 
+  if (denom == "BTC") {
+    symb <- ""
+    symb2 <- " BTC"
+    roundTo <- 8
+  }
+  message("0%")
+  for (i in 1:length(tckrs)) {
+    myPriceOnDate <- GetPriceOnDate(InputCoin=tckrs[i],denom=denom,str.Year=YYYY,str.Month=MM,str.Day=DD) # This is a DF (full-fledged response) NOT a numeric
+    myPriceOnDate$Price <- round(myPriceOnDate$Price,roundTo)
+    if (showMsgs != 0) message(tckrs[i],":\t",symb,myPriceOnDate$Price,symb2)
+    ret[i] <- myPriceOnDate$Price
+    message(round(i/length(tckrs),2)*100,"%...")
+  }
+  message("Complete.")
+  ret
+}
+
+
+GetPriceOnDate <- function(InputCoin="BTC", denom="USD", str.Year="2017",str.Month="10",str.Day="03") {
+  # default = bitcoin price on my birthday
+  message("")
+  unix_tmstmp <- GetUNIXTimestamp_Date(str.Year,str.Month,str.Day) #Date
+  df <- data.frame(DecodeUnixTimestamp(unix_tmstmp),InputCoin,GetPriceAtTimestamp(InputCoin,denom,as.numeric(unix_tmstmp)),denom)
+  names(df) <- c("Date","Coin","Price","Denom")
+  df
+}
+
+
+GetPriceOnDateTime <- function(InputCoin="BTC", denom="USD", str.Year="2017",str.Month="10",str.Day="03",str.Hour="12",str.Minute="34",str.Second="00",str.TimeZone="EST") {
+  # default = bitcoin price on my birthday at 12:34:00 PM
+  message("")
+  unix_tmstmp <- GetUNIXTimestamp_DateTime(str.Year,str.Month,str.Day,str.Hour,str.Minute,str.Second,str.TimeZone) #DateTime
+  df <- data.frame(DecodeUnixTimestamp(unix_tmstmp),InputCoin,GetPriceAtTimestamp(InputCoin,denom,as.numeric(unix_tmstmp)),denom)
+  names(df) <- c("Date","Coin","Price","Denom")
+  df
+}
+
+
+
+
+
+
+
+
+
+
+
+
+# GET UNIX TIMESTAMP      Date-Time
+# Get DateTime numeric UNIX timestamp from string-date&time inputs      (Y,M,D,H,M,S,TZ)
+GetUNIXTimestamp_DateTime <- function(str.Year="2017",str.Month="10",str.Day="03",str.Hour="12",str.Minute="00",str.Second="00",str.TimeZone="EST") {
+  uts_dt <- 1234567890
+  str.Date <- paste(str.Year,str.Month,str.Day,sep="-")
+  str.Time <- paste(str.Hour,str.Minute,str.Second,sep=":")
+  str.DateTime <- paste(str.Date,str.Time,str.TimeZone,sep=" ")
+  uts_dt <- as.numeric(as.POSIXct(str.DateTime))
+  uts_dt # return timestamp
+}
+
+
+# GET UNIX TIMESTAMP      DATE ONLY  (12:00 AM of selected date)
+# Get Date numeric UNIX timestamp from string date inputs      (Y,M,D)
+GetUNIXTimestamp_Date <- function(str.Year="2017",str.Month="10",str.Day="03") {
+  uts_d <- 1234567890
+  str.Date <- paste(str.Year,str.Month,str.Day,sep="-")
+  uts_d <- as.numeric(as.POSIXct(str.Date, format="%Y-%m-%d"))
+  uts_d # return timestamp
+}
+
+
+# DECODE UNIX TIMESTAMP   DATE-TIME
+# Get Date string from UNIX timestamp (numeric) input
+DecodeUnixTimestamp <- function(unix_tmstmp) {
+  s <- anytime(unix_tmstmp)
+  s
+}

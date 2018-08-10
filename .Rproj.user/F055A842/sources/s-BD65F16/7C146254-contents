@@ -1,0 +1,36 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           CCHist          ###
+###           SCRIPT          ###
+message("")
+message("Starting CCHistScript ... (0%)")
+message("")
+
+# ------------------< INPUTS >------------------|
+
+MM <- 04
+DD <- 28
+YYYY <- 2018
+
+coins <- myBag
+
+denom <- "USD"  # "USD" or "BTC"
+
+
+
+
+# ------------------< SCRIPT >------------------|
+
+histPriceVec <- GetPricesOnDate(c(YYYY,MM,DD),coins,denom,0)
+message("Coin prices:")
+print(histPriceVec) # a simple numeric vector!
+
+
+message("CCHistScript complete.")
+

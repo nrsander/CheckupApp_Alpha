@@ -1,0 +1,119 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###        PORTFOLIO          ###
+###        FUNCTIONS          ###
+
+
+# -----------------------------------------------------------------
+# FUNCTIONS:
+# -----------------------------------------------------------------
+#  *  ConstructPortfolio(myBag, myQtys)
+#       Returns a constructed portfolio with some calculated columns
+#
+#  *  PrintPortfolio(myPortfolio)
+#       Returns nothing; just prints
+#
+#  *  GetPortfolioValue(myPortfolio, denomination)
+#       Returns numerical value
+# -----------------------------------------------------------------
+
+ConstructPortfolio <- function(myBag,myQtys) {
+  message("Constructing Portfolio...")
+  ## Add Coin and Qty columns
+  portfolio <- data.frame(myBag,myQtys)
+  names(portfolio) <- c("Coin","Qty")
+  ## Add CurrPrice column
+  i = 0
+  for (i in 1:length(myBag)) {
+    c <- Get.Coin(myBag[i])
+    portfolio$CurrPrice[i] <- round(c$price,2)
+  }
+  
+  # If (denomination == USD) .......
+  
+  ## Add USDValue column
+  portfolio$USDValue <- round((portfolio$Qty * portfolio$CurrPrice),2)
+  ## Add BTCValue column
+  i = 0
+  for (i in 1:length(myBag)) {
+    btc <- Get.Coin("BTC")
+    portfolio$BTCValue[i] <- round((portfolio$USDValue[i]/btc$price),3)
+  }
+  ## Add PctChg_1h column
+  i = 0
+  for (i in 1:length(myBag)) {
+    c <- Get.Coin(myBag[i])
+    portfolio$PctChg_1h[i] <- c$ch1h
+  }
+  ## Add PctChg_24h column
+  i = 0
+  for (i in 1:length(myBag)) {
+    c <- Get.Coin(myBag[i])
+    portfolio$PctChg_24h[i] <- c$ch24h
+  }
+  ## Add PctChg_7d column
+  #i = 0
+  #for (i in 1:length(myBag)) {
+  #  c <- Get.Coin(myBag[i])
+  #  portfolio$PctChg_7d[i] <- c$ch7d
+  #}
+  ## Add TotValChg_1h column
+  i = 0
+  for (i in 1:length(myBag)) {
+    c <- Get.Coin(myBag[i])
+    portfolio$TotValChg_1h[i] <- ((portfolio$USDValue[i] * (1 + (c$ch1h*0.01))) - portfolio$USDValue[i])
+  }
+  ## Add TotValChg_24h column
+  i = 0
+  for (i in 1:length(myBag)) {
+    c <- Get.Coin(myBag[i])
+    portfolio$TotValChg_24h[i] <- ((portfolio$USDValue[i] * (1 + (c$ch24h*0.01))) - portfolio$USDValue[i])
+  }
+  ## Add TotValChg_7d column
+  #i = 0
+  #for (i in 1:length(myBag)) {
+  #  c <- Get.Coin(myBag[i])
+  #  portfolio$TotValChg_7d[i] <- ((portfolio$USDValue[i] * (1 + (c$ch7d*0.01))) - portfolio$USDValue[i])
+  #}
+  
+  # ...
+  message("Success! Portfolio constructed.")
+  portfolio # return
+}
+
+
+
+PrintPortfolio <- function(myPortfolio) {
+  ## Print portfolio
+  message("")
+  print(head(myPortfolio))
+  message("")
+  message("1 Hour Chg. (USD):  $", round(sum(myPortfolio$TotValChg_1h),2))
+  message("1 Day  Chg. (USD):  $", round(sum(myPortfolio$TotValChg_24h),2))
+  #message("1 Week Chg. (USD):  $", round(sum(myPortfolio$TotValChg_7d),2))
+  message("")
+  message("Total Value (USD):  $", GetPortfolioValue(portfolio,"USD"))
+  message("Total Value (BTC):   ", GetPortfolioValue(portfolio,"BTC")," BTC")
+  message("")
+}
+
+
+GetPortfolioValue <- function(myPortfolio,denomination="USD") {
+  pv <- 0
+  if (denomination == "USD") {
+    pv <- round(sum(myPortfolio$USDValue),2)
+  } else if (denomination == "BTC") {
+    pv <- round(sum(myPortfolio$BTCValue),4)
+  } else {
+    message("ERROR!  Bad denomination.")
+    message("Crashing...")
+  }
+  pv
+}
+

@@ -1,0 +1,99 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###       DOWNLOAD CMC        ###
+
+
+# Remember, X currencies are returned; X is set on startup
+
+
+########################
+## Networking Constants
+########################
+
+# Coin Market Cap URL to load from
+url_cmc <- "https://coinmarketcap.com/currencies/views/all/"
+url_cmc.hist <- "https://coinmarketcap.com/historical/" # "20171203/"    #^ Input validation should ensure historical date is +- n*7 days from the above example date, as CMC only takes historical snapshots weekly.
+
+
+########################
+## Download CMC Data
+########################
+
+DownloadCMCData <- function(NumCoins=250) {
+  message("Downloading cryptocurrency market data... (0%)")
+  url_cmc %>% # load the data @ networking constant url
+    read_html() %>%
+    html_nodes(css = "table") %>%
+    html_table() %>%
+    as.data.frame() -> "tbl_cmc"
+  
+
+  ########################
+  ## Clean Table
+  ########################
+  message("Downloading cryptocurrency market data... (50%)")
+  
+  # start cleaning the data
+  tbl_cmc[] <- lapply(tbl_cmc, gsub, pattern = "\\\n|\\s|[%*$,?]", replacement = "")
+  tbl_cmc$X. <- NULL # kill dead column
+  names(tbl_cmc) <- c("name", "symb", "mcap", "price", "supply", "vol", "ch1h", "ch24h", "ch7d") # better col names
+  tbl_cmc$name = substr(tbl_cmc$name,str_length(tbl_cmc$symb)+1,str_length(tbl_cmc$name)) # cut dumb extra text off, weird that this is needed
+  message("Success: CoinMarketCap data loaded into tbl_cmc") # sxs
+  # fix market cap column
+  num_tbl_cmc <- lapply(tbl_cmc[-c(1:2)], as.numeric) %>% # turn mcap numeric
+    as.data.frame()
+  tbl_clean <- cbind(tbl_cmc$name, tbl_cmc$symb, num_tbl_cmc) # ********* All of these should be dropped from memory.
+  names(tbl_clean) <- c("name", "symb", "mcap", "price", "supply", "vol", "ch1h", "ch24h", "ch7d") # ********* Give better names!
+  
+  ########################
+  ## Final Table
+  ########################
+  
+  # make, sort, and return Top X Mcap variable
+  top_X_mcap <- arrange(.data = tbl_clean, desc(mcap))[1:NumCoins, ]
+  top_X_mcap
+  
+  message("Updating cryptocurrency market data... (100%)")
+}
+
+
+
+
+
+
+########################
+## Snapshot CMC
+########################
+
+SnapshotCMC <- function() {
+  message("Saving current market metrics to historical log... (0%)")
+  
+  tod <- today()
+  fileName = paste(tod,"_Top",LimitCoinQuantity,"CMC",".csv",sep="")
+  file <- write.csv(CMC,fileName)
+  
+  message("Saving current market metrics to historical log... (100%)")
+  
+  # Print Success Report
+  message("._______.")
+  message("|  <+>  |")
+  message("|=======|____________.")
+  message("|        _____      ||")
+  message("|       |  .  |     ||")
+  message("|      {  {+}  }    ||")
+  message("|       |_____|     ||")
+  message("|___________________||")  
+  message(" ")
+  message("** SNAPSHOT TAKEN ***************************************************************")  
+  message("*     Directory:     ",getwd())
+  message("*          File:     ",fileName)
+  message("*          Date:     ",tod)
+  message("*********************************************************************************") 
+  message(" ")
+}

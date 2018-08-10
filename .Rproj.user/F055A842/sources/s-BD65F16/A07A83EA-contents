@@ -1,0 +1,64 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###        PORTFOLIO          ###
+###          SCRIPT           ###
+message("")
+message("Running PortfolioScript... (0%)")
+
+
+## Print Primary Portfolio:
+message("Primary portfolio:")
+PrintPortfolio(portfolio)
+message("")
+
+
+
+
+######## ########    PORTFOLIO COMPARISON FUNCTION    ######## ######## 
+
+## SECONDARY Portfolio:
+myBag.comp <- c("MTL","STRAT","KMD","OST","NEBL","WPR","BNB")
+myQtys.comp <- c(750,450,400,6000,86,5000,13.52)
+## (compare the Primary Portfolio to this theoretical / potential / yesterday's / woulda-coulda-shoulda etc. portfolio)
+
+
+## Construct the comp. portfolio
+portfolio.comp <- ConstructPortfolio(myBag.comp,myQtys.comp)
+
+## Print comp. portfolio:
+message("Comp. (secondary) portfolio:")
+PrintPortfolio(portfolio.comp)
+message("")
+
+## Compare 24 hr. performance between the two
+pf1_PctChg_24h <- round(sum(portfolio$PctChg_24h*portfolio$Weight), 2)
+pf2_PctChg_24h <- round(sum(portfolio.comp$PctChg_24h*portfolio.comp$Weight), 2)
+pf1_TotChg_24h <- round(sum(portfolio$TotValChg_24h),0)
+pf2_TotChg_24h <- round(sum(portfolio.comp$TotValChg_24h), 0)
+
+message("  ,,===================================\t==,,")
+message(" //  Last 24 Hrs. Performance ...      \t // ")
+message("||=====================================\t||")
+message("||\tPrimary Folio\t",pf1_PctChg_24h,"%\t$",pf1_TotChg_24h,"\t||")
+message("||\t(Comp. Folio)\t",pf2_PctChg_24h,"%\t$",pf2_TotChg_24h,"\t||")
+message("||\t-----------\t","------\t","-----","\t||")
+message("||\tvs. Comp.\t",pf1_PctChg_24h-pf2_PctChg_24h,"%\t$",pf1_TotChg_24h-pf2_TotChg_24h,"\t||")
+message("''=====================================\t''")
+
+# ADD TOT VAL'S TO THESE ^^^^^^^^^^^
+
+
+
+
+message("PortfolioScript complete.")
+message("")
+
+
+
+

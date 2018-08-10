@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527533269483.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "120374316",
+    "id" : "24C1348B",
+    "lastKnownWriteTime" : 1527533389,
+    "last_content_update" : 1527533950956,
+    "path" : "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp/Checkup_CalculateReturns.R",
+    "project_path" : "Checkup_CalculateReturns.R",
+    "properties" : {
+        "cursorPosition" : "13,1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

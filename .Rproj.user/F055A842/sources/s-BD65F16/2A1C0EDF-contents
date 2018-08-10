@@ -1,0 +1,41 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###          CCHist           ###
+###         FUNCTIONS         ###
+
+
+# ----------------- FUNCTIONS ----------------,
+#  GET UNIX TIMESTAMP_      Date-Time         |
+#  GET UNIX TIMESTAMP_      DATE ONLY         |
+# --------------------------------------------'
+
+
+
+# GET UNIX TIMESTAMP      Date-Time
+# Get DateTime numeric UNIX timestamp from string-date&time inputs      (Y,M,D,H,M,S,TZ)
+GetUNIXTimestamp_DateTime <- function(str.Year="2017",str.Month="10",str.Day="03",str.Hour="12",str.Minute="00",str.Second="00",str.TimeZone="EST") {
+  uts_dt <- 1234567890
+  str.Date <- paste(str.Year,str.Month,str.Day,sep="-")
+  str.Time <- paste(str.Hour,str.Minute,str.Second,sep=":")
+  str.DateTime <- paste(str.Date,str.Time,str.TimeZone,sep=" ")
+  uts_dt <- as.numeric(as.POSIXct(str.DateTime))
+  uts_dt # return timestamp
+}
+
+
+# GET UNIX TIMESTAMP      DATE ONLY  (12:00 AM of selected date)
+# Get Date numeric UNIX timestamp from string date inputs      (Y,M,D)
+GetUNIXTimestamp_Date <- function(str.Year="2017",str.Month="10",str.Day="03") {
+  uts_d <- 1234567890
+  str.Date <- paste(str.Year,str.Month,str.Day,sep="-")
+  uts_d <- as.numeric(as.POSIXct(str.Date, format="%Y-%m-%d"))
+  uts_d # return timestamp
+}
+
+

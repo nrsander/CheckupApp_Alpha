@@ -1,0 +1,77 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###       DEPENDENCIES        ###
+
+message("Loading dependencies... (0%)")
+
+
+## ============== ##       >>
+#  STARTUP PARAMS  #  =====  >>
+## ============== ##       >>
+
+
+########################################################################
+## Set Up Shop                                                  ##
+########################################################################
+
+# Working directory
+message("Setting up shop...")
+Sys.setenv(TZ = "EST")
+swd <- "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp"
+setwd(swd)
+message("Okay, let's do this.")
+message("       Working directory  ---,")
+message("                             '---->    ",swd)
+# 
+#Sys.setenv(TZ = "EST")
+
+
+########################################################################
+## Load Startup Dependencies                                          ##
+########################################################################
+
+# Libraries:
+library(coinmarketcapr) # neat
+library(rvest) # read web data
+library(jsonlite) # downloading CC API and other internet stuff someday
+library(dplyr) # getting our hands dirty with Big Data
+library(stringr) # better text
+library(anytime) # purportedly great for converting times (e.g. UNIX to DateTime in CCHist)
+library(forecast) # forecasting
+library(plotrix) # plotting utility
+library(tidyr) # clean data is better data
+library(ggplot2) # visualization
+library(lubridate) # date times
+library(scales) # plotting ts
+library(gridExtra) # plotting ts
+library(ggthemes) # plotting ts
+library(zoo) # something about time & dates
+library(prophet) # import Facebook's open source Prophet R library
+library(quantmod) # download stocks from Yahoo
+library(PerformanceAnalytics)
+library(tseries)
+library(xts)
+library(knitr)
+
+
+# Common Sources:
+source("Checkup_ReadInput.R")
+source("Checkup_PrintReports.R")
+source("Checkup_CMCFunctions.R")
+source("Checkup_CCFunctions.R")
+source("Checkup_CCHistFunctions.R")
+source("Checkup_PortfolioFunctions.R")
+source("Checkup_TSGenFunctions.R")
+source("Checkup_TxtReport.R")
+##not all of these are common but i don't have the time or need to try to figure out which ones
+##until the code starts to take too long to run or we get unforeseen memory issues...  #UPDATE: getting there!
+
+
+
+message("Dependencies loaded (100%)")

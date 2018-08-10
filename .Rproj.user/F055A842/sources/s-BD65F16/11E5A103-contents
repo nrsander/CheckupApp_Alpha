@@ -1,0 +1,39 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###           CCHist          ###
+###           SCRIPT          ###
+
+
+# ------------------ INPUTS ------------------- 
+#  What coin?
+InputCoin <- "XMR"
+# What denomination?
+PairCoin <- "USD" # "USD" / "BTC"
+
+
+
+
+# ------------------ TESTING ----------------- 
+# Test Timestamp Conversion:
+# --------------------------
+# Get UNIX timestamp of a date in a string (or date-time in a string)
+unix_tmstmp <- GetUNIXTimestamp_DateTime() # default = my birthday
+unix_tmstmp
+# Reverse-o-convert a UNIX timestamp into a date string (printed, not returned)
+PrintTimestamp(unix_tmstmp)
+
+
+
+
+
+# ------------------ SCRIPT ------------------ 
+priceAtTime <- GetPriceAtTimestamp(InputCoin,PairCoin,unix_tmstmp)
+message("Price at time:  ",priceAtTime) # THE PRICE AT TIME!!!
+
+

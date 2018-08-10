@@ -1,0 +1,114 @@
+Coin Name,Total # Commits,Quartile,Total # Contributors,Quartile,One Month # Commits,Quartile,One Month # Contributors,Quartile,One Month Closed/New,Quartile,# Devs with >10% Commits,Quartile,% Commits from Top Dev,Quartile,Telegram Members in Top Group,Quartile,Reddit Members,Quartile,Exchanges Listed,Quartile,"# of Top 5 Exchanges (Binance, Bithumb, Bitfinex, OKEx, Bittrex)",Quartile,One Month Return,Quartile,One Year Return,Quartile,Market Cap / Reddit Members,Quartile,Market Cap / Telegram Members,Quartile,# of Hashtag Tweets (30 days),Quartile,# of News Mentions (30 days),Quartile,Google Search Score (Avg 1 Year) - compared to Bitcoin ,Quartile,Reddit Readers,Quartile,Twitter Followers,Quartile
+Bitcoin,"15,951",First,504,First,100,First,27,First,2.50,First,0,First,9.63%,First,"30,791",First,"697,401",First,47,Fourth,5,Fourth,-44.90%,First,12204.75%,Fourth,"$272,945.41",Third,"$6,182,079.13",Fourth,"210,700",First,"97,700",First,21,First,"684,092",First,"713,000",First
+Ethereum,,,,,,,,,,,,,,,"8,065",Second,"296,617",First,44,Fourth,5,Fourth,38.63%,Third,9934.28%,Third,"$34,728.21",First,"$1,277,244.45",Fourth,"129,300",First,"30,200",First,3,First,"287,580",First,"329,000",First
+Ripple,"11,590",First,58,Second,27,Second,10,Second,0.80,Third,3,Fourth,36.61%,Third,"50,789",First,"168,173",First,19,Fourth,5,Fourth,28.16%,Third,20098.93%,Fourth,"$304,098.11",Third,"$1,006,932.45",Fourth,"123,700",First,"21,300",First,3,First,"164,394",First,"706,000",First
+Litecoin,"14,767",First,465,First,5,Third,12,Second,1.75,Second,1,Third,10.15%,First,"24,118",First,"180,619",First,41,Fourth,5,Fourth,-34.38%,First,4731.55%,Third,"$54,941.72",First,"$411,456.93",Third,"64,400",First,"9,100",First,1,First,"178,128",First,"625,000",First
+Monero,"5,356",Second,139,First,25,Second,5,Third,1.42,Second,1,Third,27.41%,Third,"6,808",Second,"101,977",First,14,Third,5,Fourth,-13.96%,Second,2537.35%,Second,"$47,985.78",First,"$718,778.74",Third,"16,000",Second,"3,600",First,0,First,"98,076",First,"242,000",First
+Stellar,"3,806",Second,38,Second,18,Second,7,Second,0.93,Third,2,Fourth,26.41%,Third,"8,395",Second,"63,145",First,6,Second,3,Fourth,160.88%,Fourth,27545.04%,Fourth,"$170,377.35",Third,"$1,281,533.99",Fourth,"36,800",First,379,Second,0,Second,"57,812",First,"174,000",First
+NEO,355,Fourth,18,Third,10,Third,4,Third,2.67,First,0,First,2.25%,First,"10,781",Second,"71,120",First,13,Third,4,Fourth,128.66%,Fourth,113400.82%,Fourth,"$127,664.86",Second,"$842,178.37",Third,"19,300",First,"4,200",First,0,Second,"68,245",First,"245,000",First
+Cardano,"12,893",First,52,Second,136,First,31,First,0.65,Third,1,Third,16.69%,Second,"11,053",Second,"49,016",First,3,Second,2,Third,50.12%,Third,3307.25%,Second,"$339,511.54",Fourth,"$1,505,609.12",Fourth,"33,100",First,"1,700",Second,0,First,"46,528",First,"54,700",Fourth
+EOS,,,,,,,,,,,,,,,"28,019",First,"28,640",Second,15,Fourth,4,Fourth,71.02%,Third,1298.06%,Second,"$315,508.55",Fourth,"$322,501.33",Second,"5,400",Third,435,Second,0,Second,"27,218",Second,"88,200",Second
+Bitcoin Cash,,,,,,,,,,,,,,,"5,548",Third,"28,870",Second,40,Fourth,5,Fourth,-44.83%,First,201.44%,First,"$968,046.89",Fourth,"$5,037,403.35",Fourth,"16,900",Second,"7,900",First,1,First,"28,257",Second,"86,500",Third
+Verge,1019,Third,43,Second,239,First,32,First,3.43,First,2,Fourth,16.78%,Second,"27,480",First,"44,964",First,8,Third,2,Third,-51.97%,First,513111.11%,Fourth,"$29,819.21",First,"$48,791.52",First,"59,300",First,158,Third,0,Second,"43,700",First,"229,000",First
+Dogecoin,"8,647",Second,298,First,2,Third,5,Third,1.10,Second,1,Third,12.43%,First,"2,177",Fourth,"107,378",First,19,Fourth,1,Second,-17.55%,Second,3651.47%,Third,"$8,047.73",First,"$396,945.12",Second,"5,700",Third,"2,400",First,0,First,"105,663",First,"201,000",First
+IOTA,,,,,,,,,,,,,,,"10,948",First,"103,324",First,3,Second,2,Third,-33.52%,First,278.44%,First,"$65,098.26",First,"$614,378.25",Third,"18,600",First,"2,900",First,1,First,"101,614",First,"95,100",Second
+Qtum,"14,355",First,426,First,11,Third,5,Third,0.20,Fourth,0,First,9.94%,First,"12,523",First,"11,199",Second,18,Fourth,5,Fourth,-30.89%,First,536.09%,First,"$268,418.28",Third,"$240,039.63",Second,"2,700",Fourth,842,Second,0,Second,"10,716",Third,"121,000",Second
+Dash,"13,659",First,382,First,11,Third,10,Second,0.78,Third,0,First,9.91%,First,"5,782",Second,"19,150",Second,25,Fourth,3,Fourth,-32.02%,First,5493.75%,Third,"$329,756.87",Fourth,"$1,092,155.67",Fourth,"26,800",First,161,Third,0,Second,"18,895",Second,"255,000",First
+Siacoin,"8,286",Second,45,Second,65,Second,7,Second,5.55,First,2,Fourth,38.31%,Fourth,"7,888",Second,"29,102",Second,4,Second,1,Second,22.67%,Third,11284.50%,Third,"$42,004.40",First,"$154,971.11",First,"4,200",Third,371,Third,0,Second,"28,211",Second,"86,900",Second
+Zcash,"11,004",Second,364,First,21,Second,9,Second,1.12,Second,1,Third,10.61%,First,"1,837",Fourth,"11,044",Third,22,Fourth,4,Fourth,-17.04%,Second,106961.27%,Fourth,"$133,759.13",Second,"$804,156.67",Third,"4,800",Third,"3,200",First,0,First,"10,820",Second,"58,600",Third
+Ethereum Classic,,,,,,,,,,,,,,,"4,915",Third,"14,200",Second,24,Fourth,4,Fourth,-11.44%,Second,2044.03%,Second,"$201,101.05",Third,"$581,004.04",Third,"7,900",Second,"1,300",Second,0,Second,"13,749",Second,"158,000",Second
+Lisk,"5,300",Second,35,Third,473,First,17,First,3.16,First,2,Fourth,40.19%,Fourth,"2,593",Third,"25,298",Second,11,Third,2,Third,-10.50%,Second,14593.72%,Fourth,"$99,754.27",Second,"$973,229.29",Fourth,"2,000",Fourth,631,Second,0,Second,"24,785",Second,"187,000",First
+Status,"2,174",Third,109,Second,128,First,34,First,0.89,Third,1,Third,24.15%,Third,"2,492",Third,"5,162",Third,10,Third,3,Fourth,114.89%,Fourth,373.66%,First,"$196,724.39",Third,"$407,500.53",Second,847,Fourth,81,Fourth,0,Second,"5,080",Fourth,"76,600",Third
+Augur,"11,181",First,25,Third,199,First,6,Third,0.00,Fourth,2,Fourth,35.10%,Third,"1,351",Fourth,"7,277",Third,12,Third,2,Third,-1.78%,Second,1876.04%,Second,"$129,632.82",Second,"$698,251.67",Third,"1,200",Fourth,"1,100",Second,0,Second,"7,092",Third,"98,500",Second
+Waves,"6,448",Second,30,Third,86,First,8,Second,1.40,Second,3,Fourth,16.25%,Second,"9,979",Second,"7,706",Third,10,Third,2,Third,-36.01%,First,3549.24%,Third,"$114,561.25",Second,"$88,466.68",First,"5,200",Third,100,Fourth,0,Second,"7,543",Third,"95,500",Second
+Raiblocks,"2,456",Third,26,Third,110,First,24,First,0.36,Fourth,1,Third,85.50%,Fourth,"12,051",First,"50,065",First,3,Second,0,First,94.22%,Fourth,197134.80%,Fourth,"$42,894.16",First,"$178,200.65",First,"13,000",Second,246,Third,0,Second,"46,945",First,"65,100",Third
+NEM,,,,,,,,,,,,,,,"8,800",Second,"15,267",Second,11,Third,1,Second,-8.44%,Second,18016.83%,Fourth,"$503,134.60",Fourth,"$872,881.36",Third,"29,300",First,141,Third,3,First,"14,858",Second,"164,000",Second
+BitShares,"5,212",Second,79,Second,78,Second,20,First,2.29,First,2,Fourth,42.75%,Fourth,"8,684",Second,"6,335",Third,6,Second,1,Second,-19.90%,First,11810.59%,Third,"$188,839.27",Third,"$137,758.73",First,"49,700",First,"1,800",Second,0,Second,"6,170",Third,"66,400",Third
+Digibyte,"13,102",First,420,First,0,Fourth,0,Fourth,0.20,Fourth,1,Third,10.74%,First,"12,366",First,"15,616",Second,11,Third,1,Second,-12.50%,Second,21060.55%,Fourth,"$33,833.28",First,"$42,725.25",First,"10,900",Second,211,Third,0,Second,"15,206",Second,"126,000",Second
+ICON,43,Fourth,8,Fourth,0,Fourth,0,Fourth,0.00,Fourth,3,Fourth,16.28%,Second,"15,279",First,"10,828",Third,5,Second,1,Second,34.35%,Third,1841.70%,Second,"$278,753.25",Third,"$197,548.28",Second,"5,100",Third,348,Third,0,Second,"9,081",Third,"44,900",Fourth
+Stratis,"1,480",Third,36,Third,74,Second,14,First,1.85,First,3,Fourth,16.35%,Second,"4,186",Third,"9,911",Third,7,Second,2,Third,-2.42%,Second,16606.27%,Fourth,"$140,773.19",Second,"$333,302.22",Second,"4,500",Third,415,Second,0,Second,"9,728",Third,"121,000",Second
+OmiseGo,,,,,,,,,,,,,,,"10,373",Second,"30,329",Second,17,Fourth,3,Fourth,9.84%,Third,2968.83%,Second,"$55,222.22",First,"$161,460.97",First,891,Fourth,340,Third,0,Second,"29,487",Second,"209,000",First
+Bitcoin Gold,"15,033",First,476,First,16,Third,5,Third,0.36,Fourth,0,First,9.97%,First,"4,575",Third,"3,451",Fourth,16,Fourth,5,Fourth,-41.41%,First,-64.43%,First,"$874,919.02",Fourth,"$659,966.24",Third,"12,600",Second,"3,100",First,0,First,"1,042",Fourth,"61,600",Third
+Decred,"3,579",Third,83,Second,14,Third,4,Third,2.00,First,2,Fourth,46.80%,Fourth,"2,202",Third,"6,719",Third,6,Second,1,Second,-5.32%,Second,6136.62%,Third,"$87,422.48",Second,"$266,753.69",Second,"1,400",Fourth,428,Second,0,Second,"6,503",Third,"33,800",Fourth
+0x,"2,741",Third,13,Fourth,231,First,13,Second,1.00,Second,2,Fourth,53.12%,Fourth,"4,122",Third,"8,850",Third,13,Third,2,Third,197.86%,Fourth,1475.30%,Second,"$99,703.41",Second,N/A,,"1,900",Fourth,"2,800",First,0,Second,"8,357",Third,"78,000",Third
+Steem,"2,165",Third,35,Third,0,Fourth,7,Second,1.17,Second,3,Fourth,33.90%,Third,"1,258",Fourth,"2,521",Fourth,3,Second,1,Second,86.20%,Fourth,3946.67%,Third,"$590,393.82",Fourth,"$1,183,134.20",Fourth,"1,500",Fourth,850,Second,0,Second,"2,521",Fourth,"77,100",Third
+Bytecoin,88,Fourth,5,Fourth,0,Fourth,0,Fourth,0.05,Fourth,0,First,5.68%,First,"6,689",Second,"9,563",Third,3,Second,0,First,20.34%,Third,14805.66%,Fourth,"$135,698.00",Second,"$194,002.09",First,"7,200",Third,317,Third,0,Second,"9,563",Third,"29,300",Fourth
+Tron,318,Fourth,23,Third,213,First,26,First,0.73,Third,2,Fourth,13.52%,Second,"15,913",First,"56,809",First,12,Third,2,Third,76.78%,Third,3250.00%,Second,"$77,747.88",First,"$277,557.94",Second,"256,200",First,"46,400",First,0,Second,"56,809",First,"229,000",First
+VeChain,,,,,,,,,,,,,,,"14,260",First,"33,611",Second,10,Third,1,Second,420.55%,Fourth,3066.67%,Second,"$104,985.09",Second,"$247,451.19",Second,"10,000",Second,"1,700",Second,0,Second,"33,611",Second,"99,800",Second
+Walton,,,,,,,,,,,,,,,"5,060",Third,"4,192",Fourth,5,Second,1,Second,245.30%,Fourth,3466.98%,Second,"$226,586.49",Third,"$187,717.50",First,"4,200",Third,38,Fourth,0,Second,"4,192",Fourth,"37,900",Fourth
+Maker,598,Fourth,15,Fourth,2,Third,2,Fourth,1.00,Second,3,Fourth,21.57%,Second,0,Fourth,"2,560",Fourth,2,First,0,First,70.37%,Third,6487.24%,Third,"$351,544.60",Fourth,N/A,,812,Fourth,31,Fourth,0,Second,"2,560",Fourth,"4,483",Fourth
+Veritaseum,38,Fourth,1,Fourth,0,Fourth,0,Fourth,1.00,Second,1,Third,100.00%,Fourth,739,Fourth,0,Fourth,3,Second,0,First,5.49%,Third,659.03%,First,N/A,,"$1,025,493.70",Fourth,790,Fourth,81,Fourth,0,Second,0,Fourth,"6,966",Fourth
+Hshare,157,Fourth,4,Fourth,28,Second,6,Third,0.20,Fourth,2,Fourth,32.48%,Third,398,Fourth,141,Fourth,10,Third,2,Third,-34.18%,First,-9.76%,First,"$5,454,504.04",Fourth,"$1,932,374.55",Fourth,"9,400",Second,128,Third,0,Second,141,Fourth,"8,833",Fourth
+Electroneum,"4,484",Second,116,Second,0,Fourth,0,Fourth,0.19,Fourth,1,Third,25.83%,Third,"23,286",First,"14,482",Second,1,First,0,First,35.55%,Third,10.90%,First,"$50,327.98",First,"$31,299.91",First,"9,700",Second,458,Second,0,First,"14,482",Second,"94,700",Second
+KuCoin Shares,,,,,,,,,,,,,,,"4,254",Third,"8,315",Third,1,First,0,First,504.84%,Fourth,849.37%,First,"$81,947.42",Second,"$160,176.96",First,"9,400",Second,98,Fourth,0,Second,"8,315",Third,,Fourth
+Komodo,"14,649",First,361,First,0,Fourth,2,Fourth,1.00,Second,1,Third,18.30%,Second,"1,380",Fourth,"5,137",Fourth,5,Second,2,Third,-36.49%,First,5685.83%,Third,"$135,610.17",Second,"$504,803.94",Third,"9,000",Second,38,Fourth,0,Second,"5,137",Third,"78,300",Third
+Ark,"1,808",Third,16,Fourth,3,Third,3,Fourth,1.00,Second,2,Fourth,76.49%,Fourth,"3,440",Third,"4,241",Fourth,5,Second,2,Third,-5.29%,Second,21311.04%,Fourth,"$160,053.73",Third,"$197,322.06",Second,"10,200",Second,64,Fourth,0,Second,"4,241",Fourth,"55,400",Third
+Populous,"1,077",Third,23,Third,0,Fourth,0,Fourth,0.86,Third,1,Third,66.48%,Fourth,"1,989",Fourth,308,Fourth,5,Second,1,Second,26.70%,Third,1639.15%,Second,"$5,967,656.24",Fourth,"$924,101.62",Fourth,"5,100",Third,31,Fourth,0,Second,308,Fourth,"15,700",Fourth
+IOStoken,,,,,,,,,,,,,,,"51,688",First,780,Fourth,3,Second,2,Third,310.63%,Fourth,310.63%,First,"$868,392.64",Fourth,$16.80,First,"4,700",Third,91,Fourth,0,Second,780,Fourth,"85,200",Third
+RChain,250,Fourth,13,Fourth,1,Fourth,17,First,4.00,First,1,Third,13.20%,Second,"1,082",Fourth,"1,392",Fourth,2,First,1,Second,240.74%,Fourth,868.42%,First,"$449,017.78",Fourth,"$577,664.27",Third,"2,600",Fourth,66,Fourth,0,Second,"1,392",Fourth,"6,464",Fourth
+Loopring,449,Fourth,12,Fourth,28,Second,6,Third,4.00,First,2,Fourth,26.06%,Third,"2,123",Fourth,"3,495",Fourth,6,Second,1,Second,237.50%,Fourth,815.25%,First,"$173,175.91",Third,"$285,091.76",Second,"3,000",Fourth,117,Third,0,Second,"3,495",Fourth,"18,900",Fourth
+Binance Coin,,,,,,,,,,,,,,,"5,016",Third,"38,634",Second,2,First,1,Second,90.16%,Fourth,11326.09%,Third,"$33,985.48",First,"$261,761.35",Second,"7,600",Third,133,Third,0,Second,"38,634",Second,,Fourth
+Ardor,6,Fourth,1,Fourth,6,Third,1,Fourth,0.25,Fourth,1,Third,100.00%,Fourth,"1,582",Fourth,"5,922",Third,3,Second,1,Second,-31.29%,First,5233.33%,Third,"$186,908.39",Third,"$699,665.90",Third,330,Fourth,50,Fourth,0,Second,"5,922",Third,"62,800",Third
+Tether,,,,,,,,,,,,,,,0,Fourth,"1,847",Fourth,3,Second,0,First,-2.94%,Second,-1.00%,First,"$876,546.17",Fourth,N/A,,"8,100",Second,56,Fourth,0,Second,"1,847",Fourth,"17,500",Fourth
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Average,"5,698",,126,,62,,10,,1,,1,,30%,,"9,943",,"48,417",,11.7,,2.2,,55%,,24394%,,"$440,990",,"$754,705",,"25,517",,"5,006",,1,,"47,154",,"141,797",
+Median,"3,693",,37,,17,,7,,1,,1,,23%,,"6,236",,"12,700",,9.0,,2.0,,8%,,3600%,,"$140,773",,"$409,479",,"7,750",,397,,0,,"12,285",,"87,550",
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Minimum,6,,1,,0,,0,,0,,0,,2%,,0,,0,,1.0,,0.0,,-52%,,-64%,,"$8,048",,$17,,330,,31,,0.00,,0,,"4,483",
+First Quartile,703,,17,,2,,3,,0,,1,,13%,,2190,,5150,,3.0,,1.0,,-19%,,1083%,,"$78,798",,"$196,492",,"3,600",,109,,0.00,,"5,109",,"55,400",
+Second Quartile,"3,693",,37,,17,,7,,1,,1,,23%,,5782,,11199,,8.0,,2.0,,5%,,3549%,,"$150,413",,"$409,479",,"7,900",,379,,0.00,,"10,820",,"86,900",
+Third Quartile,"11,137",,133,,84,,14,,2,,2,,38%,,11552,,41799,,14.5,,3.0,,81%,,12008%,,"$312,656",,"$885,686",,"17,750",,"2,100",,0.00,,"41,167",,"174,000",
+Maximum,"15,951",,504,,473,,34,,6,,3,,100%,,51688,,697401,,47.0,,5.0,,505%,,513111%,,"$5,967,656",,"$6,182,079",,"256,200",,"97,700",,21,,"684,092",,"713,000",
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,First,Second,Third,Fourth,Weighted Average,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bitcoin,15,0,1,4,1.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ethereum,7,1,2,3,2.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ripple,8,3,4,5,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Litecoin,12,2,4,2,1.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Monero,7,7,5,1,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Stellar,4,8,3,5,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+NEO,8,3,5,4,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Cardano,7,6,4,3,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EOS,1,7,2,3,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bitcoin Cash,4,3,2,4,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Verge,11,3,4,2,1.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Dogecoin,8,5,5,2,2.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+IOTA,9,2,2,0,1.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Qtum,7,5,4,4,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Dash,7,5,4,4,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Siacoin,3,11,4,2,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Zcash,4,7,5,4,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ethereum Classic,0,8,3,2,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Lisk,4,7,4,5,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Status,3,3,9,5,2.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Augur,2,6,8,4,2.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Waves,3,8,7,2,2.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Raiblocks,8,3,5,4,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+NEM,2,6,3,2,2.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BitShares,5,8,5,2,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Digibyte,6,7,3,4,2.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ICON,1,6,6,7,3.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Stratis,2,9,7,2,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+OmiseGo,3,5,2,3,2.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bitcoin Gold,8,1,5,6,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Decred,1,8,7,4,2.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+0x,2,5,7,5,2.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Steem,0,6,5,9,3.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bytecoin,4,4,5,7,2.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Tron,9,4,5,2,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+VeChain,1,10,1,1,2.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Walton,1,4,3,5,2.9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Maker,2,3,3,11,3.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Veritaseum,2,3,2,12,3.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Hshare,2,3,5,10,3.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Electroneum,7,7,3,3,2.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+KuCoin Shares,4,3,3,3,2.4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Komodo,3,6,6,5,2.7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ark,0,6,6,8,3.1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Populous,0,4,6,10,3.3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+IOStoken,3,2,3,5,2.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+RChain,4,3,2,11,3.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Loopring,2,5,4,9,3.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Binance Coin,2,5,4,2,2.5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ardor,1,3,8,8,3.2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Tether,2,4,0,6,2.8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

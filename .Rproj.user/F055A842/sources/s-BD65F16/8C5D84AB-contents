@@ -1,0 +1,178 @@
+
+
+library(ggplot2)
+library(twitteR)
+library(ROAuth)
+library(httr)
+library(plyr)
+
+# Set API Keys
+
+# Twitter API -------------
+#    URL constants:
+requestURL <- "https://api.twitter.com/oauth/request_token" # request
+accessURL <- "https://api.twitter.com/oauth/access_token" # access
+authURL <- "https://api.twitter.com/oauth/authorize" # auth
+#    API keys:
+consumerKey <- "HFTWlWv82x9KvRjnD8p9YTuuC"
+consumerSecret <- "iHEXO6F07Eg9SR1jQSylqIBiW8PQpb5MAkp9QDNA7DisblyrtL"
+accessToken <- "970423830979207168-d3yordKAyOUg4KCiIbckvXqFFWs6Ie0" # 970423830979207168d3yordKAyOUg4KCiIbckvXqFFWs6Ie0
+accessTokenSecret <- "WVuOrIuZsvEIGCpXA0JA54hJSMdkTLfoFv9kMbyiCva3E"
+
+api_key <- consumerKey
+api_secret <- consumerSecret
+access_token <- accessToken
+access_token_secret <- accessTokenSecret
+
+setup_twitter_oauth(api_key, api_secret, access_token, access_token_secret)
+
+
+
+# Grab some tweets
+myTweets <- searchTwitter('@VentureCoinist target', n=300,resultType='recent',lang='en',retryOnRateLimit=10)
+myTweets <- strip_retweets(myTweets, strip_manual = TRUE, strip_mt = TRUE)
+
+# Loop over tweets and extract text
+myFeed = laply(myTweets, function(t) t$getText())
+head(myFeed)
+
+
+# Read in dictionary of positive and negative words
+yay = scan('SentimentLexicon/positive-words.txt',
+           what='character', comment.char=';')
+boo = scan('SentimentLexicon/negative-words.txt',
+           what='character', comment.char=';')
+# Add a few twitter-specific negative phrases
+bad_text = c(boo, 'shitcoin', 'hodl', 'tanking')
+good_text = c(yay, 'bottom', 'entry', 'pumping', 'mooning')
+
+
+
+
+score.sentiment <- function(sentences, good_text, bad_text, .progress='none') {
+  require(plyr)
+  require(stringr)
+  # we got a vector of sentences. plyr will handle a list
+  # or a vector as an "l" for us
+  # we want a simple array of scores back, so we use
+  # "l" + "a" + "ply" = "laply":
+  scores <- laply(sentences, function(sentence, good_text, bad_text) {
+    # clean up sentences with R's regex-driven global substitute, gsub():
+    sentence <- gsub('[[:punct:]]', '', sentence)
+    sentence <- gsub('[[:cntrl:]]', '', sentence)
+    sentence <- gsub('\\d+', '', sentence)
+    #to remove emojis
+    sentence <- iconv(sentence, 'UTF-8', 'ASCII')
+    sentence <- tolower(sentence)        
+    # split into words. str_split is in the stringr package
+    word.list <- str_split(sentence, '\\s+')
+    # sometimes a list() is one level of hierarchy too much
+    words <- unlist(word.list)
+    
+    # compare our words to the dictionaries of positive & negative terms
+    pos.matches <- match(words, good_text)
+    neg.matches <- match(words, bad_text)
+    # match() returns the position of the matched term or NA
+    # we just want a TRUE/FALSE:
+    pos.matches = !is.na(pos.matches)
+    neg.matches = !is.na(neg.matches)
+    # and conveniently enough, TRUE/FALSE will be treated as 1/0 by sum():
+    score = sum(pos.matches) - sum(neg.matches)
+    return(score)}, good_text, bad_text, .progress=.progress )
+  
+  scores.df = data.frame(score=scores, text=sentences)
+  return(scores.df)
+}
+
+
+
+# Call the function and return a data frame
+rezzies <- score.sentiment(myFeed, good_text, bad_text, .progress='text')
+head(rezzies)
+# Cut the text, just gets in the way
+#plotdat <- rezzies[c("name", "score")]
+# Remove neutral values of 0
+plotdat <- rezzies[!rezzies$score == 0, ]
+
+# Nice little quick plot
+qplot(factor(score), data=plotdat, geom="bar", 
+      #fill=factor(name),
+      xlab = "Sentiment Score")
+View(plotdat)
+
+
+library(twitteR)
+k<-userTimeline("binance", n = 50, includeRts = F)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### ### ###
+
+##install.packages("wordcloud") # fails because of gfortran error while installing package 'slam'
+##library(tm) # same # needs package 'slam'
+library(twitteR)
+library(ROAuth)
+library(RColorBrewer)
+library(base64enc)
+
+
+
+
+#
+#
+#  TRASH!!!
+#
+#
+
+
+
+
+
+# Twitter API -------------
+
+# Set constant URLs:
+requestURL <- "https://api.twitter.com/oauth/request_token" # request
+accessURL <- "https://api.twitter.com/oauth/access_token" # access
+authURL <- "https://api.twitter.com/oauth/authorize" # auth
+
+# API keys
+consumerKey <- "HFTWlWv82x9KvRjnD8p9YTuuC"
+consumerSecret <- "iHEXO6F07Eg9SR1jQSylqIBiW8PQpb5MAkp9QDNA7DisblyrtL"
+accessToken <- "970423830979207168-d3yordKAyOUg4KCiIbckvXqFFWs6Ie0" # 970423830979207168d3yordKAyOUg4KCiIbckvXqFFWs6Ie0
+accessTokenSecret <- "WVuOrIuZsvEIGCpXA0JA54hJSMdkTLfoFv9kMbyiCva3E"
+
+# download CURL certificateL 
+download.file(url="http://curl.haxx.se/ca/cacert.pem",destfile="cacert.pem")
+
+# query params
+searchString <- "$ZRX"
+Q_tweets <- 1000
+
+# send search query
+relevantTweets <- searchTwitter(searchString, n=Q_tweets, lang='en')
+print(length(relevantTweets))
+print(head(relevantTweets))
+#?searchTwitter
+
+######## Setup #########
+setup_twitter_oauth(consumerKey,
+                    consumerSecret,
+                    accessToken,
+                    accessTokenSecret) 
+
+

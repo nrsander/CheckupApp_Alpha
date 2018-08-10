@@ -1,0 +1,26 @@
+
+
+########################
+#        Script        #
+########################
+
+# Download data for the Top x coins
+myBigCoinData <- DownloadCMCData(50)
+print(head(myBigCoinData)) # preview
+
+# Run PRICE-BUNDLER script on the Top x coins
+mySymbVec <- as.character(myBigCoinData$symb)
+myPriceBundle <- HistoOHLCV(InputCoinSet=mySymbVec,PairCoin="USD",timeframe="minute",pd=2000,myTzone="UTC",showPlot=TRUE)
+  
+# Run SAVE SCRIPT on the bundle
+myPriceBundle <- SavePrices(myPriceBundle)
+
+
+
+
+
+
+
+
+
+

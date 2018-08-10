@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527548959711.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "41E68317",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1527548959711,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "61c4fe1a511a4c7dbca32ad328d35eda",
+        "name" : "myHistoricalPricesList",
+        "title" : "myHistoricalPricesList"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

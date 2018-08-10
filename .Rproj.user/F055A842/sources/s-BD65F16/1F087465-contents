@@ -1,0 +1,56 @@
+###                           ###
+### - * - * - * - * - * - * - ###
+### *     C H E C K U P     * ###
+### * - * - * - * - * - * - * ###
+###                           ###
+###   N i c k   S a n d e r   ###
+###                           ###
+###                           ###
+###       DEPENDENCIES        ###
+
+message("Loading dependencies... (0%)")
+
+## ============== ##       >>
+#  STARTUP PARAMS  #  =====  >>
+## ============== ##       >>
+
+
+########################################################################
+## Directory                                                          ##
+########################################################################
+
+# Where's the working directory?
+swd <- "~/Desktop/CRYPTO LYFE/Checkup/CheckupApp"
+message("Setting up home base...")
+setwd(swd)
+
+########################################################################
+## Load Startup Dependencies                                          ##
+########################################################################
+
+# Sources:
+source("Checkup_CMCFunctions.R")
+source("Checkup_CMCPrintReports.R")
+source("Checkup_CCFunctions.R")
+source("Checkup_DownloadCMC.R")
+source("Checkup_PrintStartupReports.R")
+
+# Libraries:
+library(coinmarketcapr) # neat
+library(rvest) # read web data
+library(jsonlite) # downloading CC API and other internet stuff someday
+library(dplyr) # getting our hands dirty with Big Data
+library(stringr) # better text
+library(forecast) # forecasting
+library(plotrix) # plotting utility
+library(tidyr) # clean data is better data
+library(ggplot2) # visualization
+library(lubridate) # date times
+library(scales) # plotting ts
+library(gridExtra) # plotting ts
+library(ggthemes) # plotting ts
+#library(crypto) # doesn't work
+
+
+message("Loading dependencies... (100%)")
+

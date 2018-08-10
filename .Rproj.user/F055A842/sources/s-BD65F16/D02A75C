@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527548967118.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D02A75C",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1527548967118,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "25048d1ee19b43099889ac757f4845cf",
+        "name" : "List_AllHistoClosePrices",
+        "title" : "List_AllHistoClosePrices"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}
